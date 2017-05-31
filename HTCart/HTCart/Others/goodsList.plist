@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>shop_name</key>
+		<string>商品1旗舰店</string>
+		<key>goods_name</key>
+		<string>商品1</string>
+		<key>goods_image</key>
+		<string>goods1</string>
+		<key>original_price</key>
+		<integer>88</integer>
+		<key>current_price</key>
+		<real>39.9</real>
+	</dict>
+	<dict>
+		<key>shop_name</key>
+		<string>商品2旗舰店</string>
+		<key>goods_name</key>
+		<string>商品2</string>
+		<key>goods_image</key>
+		<string>goods2</string>
+		<key>original_price</key>
+		<integer>139</integer>
+		<key>current_price</key>
+		<real>58</real>
+	</dict>
+	<dict>
+		<key>shop_name</key>
+		<string>商品3旗舰店</string>
+		<key>goods_name</key>
+		<string>商品3</string>
+		<key>goods_image</key>
+		<string>goods3</string>
+		<key>original_price</key>
+		<integer>55</integer>
+		<key>current_price</key>
+		<real>48.8</real>
+	</dict>
+	<dict>
+		<key>shop_name</key>
+		<string>商品4旗舰店</string>
+		<key>goods_name</key>
+		<string>商品4</string>
+		<key>goods_image</key>
+		<string>goods4</string>
+		<key>original_price</key>
+		<integer>168</integer>
+		<key>current_price</key>
+		<real>102</real>
+	</dict>
+</array>
+</plist>

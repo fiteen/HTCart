@@ -1,0 +1,474 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		252F67AC1ED94D7A00E5E5C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 252F67AB1ED94D7A00E5E5C8 /* main.m */; };
+		252F67AF1ED94D7A00E5E5C8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 252F67AE1ED94D7A00E5E5C8 /* AppDelegate.m */; };
+		252F67B21ED94D7A00E5E5C8 /* HTHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 252F67B11ED94D7A00E5E5C8 /* HTHomeViewController.m */; };
+		252F67B51ED94D7A00E5E5C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 252F67B31ED94D7A00E5E5C8 /* Main.storyboard */; };
+		252F67B71ED94D7A00E5E5C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 252F67B61ED94D7A00E5E5C8 /* Assets.xcassets */; };
+		252F67BA1ED94D7A00E5E5C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 252F67B81ED94D7A00E5E5C8 /* LaunchScreen.storyboard */; };
+		252F67C41ED9571700E5E5C8 /* HTTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 252F67C31ED9571700E5E5C8 /* HTTabBarViewController.m */; };
+		252F67CD1ED95DE600E5E5C8 /* UIButton+ImageTitleSpacing.m in Sources */ = {isa = PBXBuildFile; fileRef = 252F67CC1ED95DE600E5E5C8 /* UIButton+ImageTitleSpacing.m */; };
+		252F67D11ED96A2E00E5E5C8 /* HTCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 252F67D01ED96A2E00E5E5C8 /* HTCartViewController.m */; };
+		2569CEFF1EDE6DBE0091B2A9 /* HTCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2569CEFE1EDE6DBE0091B2A9 /* HTCollectionViewCell.m */; };
+		2569CF031EDE9D6D0091B2A9 /* HTCartBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2569CF021EDE9D6D0091B2A9 /* HTCartBottomView.m */; };
+		2569CF061EDEA2D20091B2A9 /* UILabel+TextAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 2569CF051EDEA2D20091B2A9 /* UILabel+TextAttribute.m */; };
+		2569CF0D1EDEC07C0091B2A9 /* HTCartNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2569CF0B1EDEC07C0091B2A9 /* HTCartNormalCell.m */; };
+		2569CF0E1EDEC07C0091B2A9 /* HTCartNormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2569CF0C1EDEC07C0091B2A9 /* HTCartNormalCell.xib */; };
+		2569CF101EDEC2400091B2A9 /* goodsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2569CF0F1EDEC2400091B2A9 /* goodsList.plist */; };
+		2569CF141EDEC43F0091B2A9 /* HTGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2569CF131EDEC43F0091B2A9 /* HTGoodsModel.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		252F67A71ED94D7A00E5E5C8 /* HTCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HTCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		252F67AB1ED94D7A00E5E5C8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		252F67AD1ED94D7A00E5E5C8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../AppDelegate.h; sourceTree = "<group>"; };
+		252F67AE1ED94D7A00E5E5C8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../AppDelegate.m; sourceTree = "<group>"; };
+		252F67B01ED94D7A00E5E5C8 /* HTHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTHomeViewController.h; sourceTree = "<group>"; };
+		252F67B11ED94D7A00E5E5C8 /* HTHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTHomeViewController.m; sourceTree = "<group>"; };
+		252F67B41ED94D7A00E5E5C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		252F67B61ED94D7A00E5E5C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
+		252F67B91ED94D7A00E5E5C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		252F67BB1ED94D7A00E5E5C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		252F67C21ED9571700E5E5C8 /* HTTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTabBarViewController.h; sourceTree = "<group>"; };
+		252F67C31ED9571700E5E5C8 /* HTTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTabBarViewController.m; sourceTree = "<group>"; };
+		252F67CA1ED95B4400E5E5C8 /* HTCartPrefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTCartPrefix.pch; sourceTree = "<group>"; };
+		252F67CB1ED95DE600E5E5C8 /* UIButton+ImageTitleSpacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ImageTitleSpacing.h"; sourceTree = "<group>"; };
+		252F67CC1ED95DE600E5E5C8 /* UIButton+ImageTitleSpacing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ImageTitleSpacing.m"; sourceTree = "<group>"; };
+		252F67CF1ED96A2E00E5E5C8 /* HTCartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCartViewController.h; sourceTree = "<group>"; };
+		252F67D01ED96A2E00E5E5C8 /* HTCartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCartViewController.m; sourceTree = "<group>"; };
+		2569CEFD1EDE6DBE0091B2A9 /* HTCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCollectionViewCell.h; sourceTree = "<group>"; };
+		2569CEFE1EDE6DBE0091B2A9 /* HTCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCollectionViewCell.m; sourceTree = "<group>"; };
+		2569CF011EDE9D6D0091B2A9 /* HTCartBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCartBottomView.h; sourceTree = "<group>"; };
+		2569CF021EDE9D6D0091B2A9 /* HTCartBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCartBottomView.m; sourceTree = "<group>"; };
+		2569CF041EDEA2D20091B2A9 /* UILabel+TextAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+TextAttribute.h"; sourceTree = "<group>"; };
+		2569CF051EDEA2D20091B2A9 /* UILabel+TextAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+TextAttribute.m"; sourceTree = "<group>"; };
+		2569CF0A1EDEC07C0091B2A9 /* HTCartNormalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCartNormalCell.h; sourceTree = "<group>"; };
+		2569CF0B1EDEC07C0091B2A9 /* HTCartNormalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCartNormalCell.m; sourceTree = "<group>"; };
+		2569CF0C1EDEC07C0091B2A9 /* HTCartNormalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HTCartNormalCell.xib; sourceTree = "<group>"; };
+		2569CF0F1EDEC2400091B2A9 /* goodsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = goodsList.plist; sourceTree = "<group>"; };
+		2569CF121EDEC43F0091B2A9 /* HTGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTGoodsModel.h; sourceTree = "<group>"; };
+		2569CF131EDEC43F0091B2A9 /* HTGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTGoodsModel.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		252F67A41ED94D7A00E5E5C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		252F679E1ED94D7A00E5E5C8 = {
+			isa = PBXGroup;
+			children = (
+				252F67A91ED94D7A00E5E5C8 /* HTCart */,
+				252F67A81ED94D7A00E5E5C8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		252F67A81ED94D7A00E5E5C8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				252F67A71ED94D7A00E5E5C8 /* HTCart.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		252F67A91ED94D7A00E5E5C8 /* HTCart */ = {
+			isa = PBXGroup;
+			children = (
+				252F67C61ED95A1300E5E5C8 /* Util */,
+				252F67C51ED9577900E5E5C8 /* Main */,
+				252F67C71ED95A2500E5E5C8 /* Others */,
+				252F67AA1ED94D7A00E5E5C8 /* Supporting Files */,
+			);
+			path = HTCart;
+			sourceTree = "<group>";
+		};
+		252F67AA1ED94D7A00E5E5C8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				252F67AB1ED94D7A00E5E5C8 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		252F67C11ED956E000E5E5C8 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				252F67C21ED9571700E5E5C8 /* HTTabBarViewController.h */,
+				252F67C31ED9571700E5E5C8 /* HTTabBarViewController.m */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		252F67C51ED9577900E5E5C8 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				252F67C11ED956E000E5E5C8 /* Tabbar */,
+				252F67C81ED95A7300E5E5C8 /* Home */,
+				252F67C91ED95A7D00E5E5C8 /* Cart */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		252F67C61ED95A1300E5E5C8 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				252F67CB1ED95DE600E5E5C8 /* UIButton+ImageTitleSpacing.h */,
+				252F67CC1ED95DE600E5E5C8 /* UIButton+ImageTitleSpacing.m */,
+				2569CF041EDEA2D20091B2A9 /* UILabel+TextAttribute.h */,
+				2569CF051EDEA2D20091B2A9 /* UILabel+TextAttribute.m */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		252F67C71ED95A2500E5E5C8 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				252F67AD1ED94D7A00E5E5C8 /* AppDelegate.h */,
+				252F67AE1ED94D7A00E5E5C8 /* AppDelegate.m */,
+				252F67B31ED94D7A00E5E5C8 /* Main.storyboard */,
+				252F67B61ED94D7A00E5E5C8 /* Assets.xcassets */,
+				252F67B81ED94D7A00E5E5C8 /* LaunchScreen.storyboard */,
+				252F67BB1ED94D7A00E5E5C8 /* Info.plist */,
+				252F67CA1ED95B4400E5E5C8 /* HTCartPrefix.pch */,
+				2569CF0F1EDEC2400091B2A9 /* goodsList.plist */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		252F67C81ED95A7300E5E5C8 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2569CEFC1EDE61EE0091B2A9 /* View */,
+				2569CEFB1EDE61EE0091B2A9 /* Controller */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		252F67C91ED95A7D00E5E5C8 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				2569CF111EDEC4260091B2A9 /* Model */,
+				2569CF001EDE9D4B0091B2A9 /* View */,
+				252F67CE1ED96A0D00E5E5C8 /* Controller */,
+			);
+			path = Cart;
+			sourceTree = "<group>";
+		};
+		252F67CE1ED96A0D00E5E5C8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				252F67CF1ED96A2E00E5E5C8 /* HTCartViewController.h */,
+				252F67D01ED96A2E00E5E5C8 /* HTCartViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2569CEFB1EDE61EE0091B2A9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				252F67B01ED94D7A00E5E5C8 /* HTHomeViewController.h */,
+				252F67B11ED94D7A00E5E5C8 /* HTHomeViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2569CEFC1EDE61EE0091B2A9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2569CEFD1EDE6DBE0091B2A9 /* HTCollectionViewCell.h */,
+				2569CEFE1EDE6DBE0091B2A9 /* HTCollectionViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2569CF001EDE9D4B0091B2A9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2569CF011EDE9D6D0091B2A9 /* HTCartBottomView.h */,
+				2569CF021EDE9D6D0091B2A9 /* HTCartBottomView.m */,
+				2569CF0A1EDEC07C0091B2A9 /* HTCartNormalCell.h */,
+				2569CF0B1EDEC07C0091B2A9 /* HTCartNormalCell.m */,
+				2569CF0C1EDEC07C0091B2A9 /* HTCartNormalCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2569CF111EDEC4260091B2A9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2569CF121EDEC43F0091B2A9 /* HTGoodsModel.h */,
+				2569CF131EDEC43F0091B2A9 /* HTGoodsModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		252F67A61ED94D7A00E5E5C8 /* HTCart */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 252F67BE1ED94D7A00E5E5C8 /* Build configuration list for PBXNativeTarget "HTCart" */;
+			buildPhases = (
+				252F67A31ED94D7A00E5E5C8 /* Sources */,
+				252F67A41ED94D7A00E5E5C8 /* Frameworks */,
+				252F67A51ED94D7A00E5E5C8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HTCart;
+			productName = HTCart;
+			productReference = 252F67A71ED94D7A00E5E5C8 /* HTCart.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		252F679F1ED94D7A00E5E5C8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = Martell;
+				TargetAttributes = {
+					252F67A61ED94D7A00E5E5C8 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 5YDLJAV22H;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 252F67A21ED94D7A00E5E5C8 /* Build configuration list for PBXProject "HTCart" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 252F679E1ED94D7A00E5E5C8;
+			productRefGroup = 252F67A81ED94D7A00E5E5C8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				252F67A61ED94D7A00E5E5C8 /* HTCart */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		252F67A51ED94D7A00E5E5C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2569CF0E1EDEC07C0091B2A9 /* HTCartNormalCell.xib in Resources */,
+				252F67BA1ED94D7A00E5E5C8 /* LaunchScreen.storyboard in Resources */,
+				252F67B71ED94D7A00E5E5C8 /* Assets.xcassets in Resources */,
+				252F67B51ED94D7A00E5E5C8 /* Main.storyboard in Resources */,
+				2569CF101EDEC2400091B2A9 /* goodsList.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		252F67A31ED94D7A00E5E5C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2569CEFF1EDE6DBE0091B2A9 /* HTCollectionViewCell.m in Sources */,
+				252F67B21ED94D7A00E5E5C8 /* HTHomeViewController.m in Sources */,
+				2569CF061EDEA2D20091B2A9 /* UILabel+TextAttribute.m in Sources */,
+				252F67AF1ED94D7A00E5E5C8 /* AppDelegate.m in Sources */,
+				2569CF141EDEC43F0091B2A9 /* HTGoodsModel.m in Sources */,
+				2569CF031EDE9D6D0091B2A9 /* HTCartBottomView.m in Sources */,
+				252F67D11ED96A2E00E5E5C8 /* HTCartViewController.m in Sources */,
+				252F67C41ED9571700E5E5C8 /* HTTabBarViewController.m in Sources */,
+				252F67CD1ED95DE600E5E5C8 /* UIButton+ImageTitleSpacing.m in Sources */,
+				2569CF0D1EDEC07C0091B2A9 /* HTCartNormalCell.m in Sources */,
+				252F67AC1ED94D7A00E5E5C8 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		252F67B31ED94D7A00E5E5C8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				252F67B41ED94D7A00E5E5C8 /* Base */,
+			);
+			name = Main.storyboard;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		252F67B81ED94D7A00E5E5C8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				252F67B91ED94D7A00E5E5C8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			path = ..;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		252F67BC1ED94D7A00E5E5C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		252F67BD1ED94D7A00E5E5C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		252F67BF1ED94D7A00E5E5C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5YDLJAV22H;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HTCart/Others/HTCartPrefix.pch";
+				INFOPLIST_FILE = HTCart/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.martell.HTCart;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		252F67C01ED94D7A00E5E5C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5YDLJAV22H;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HTCart/Others/HTCartPrefix.pch";
+				INFOPLIST_FILE = HTCart/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.martell.HTCart;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		252F67A21ED94D7A00E5E5C8 /* Build configuration list for PBXProject "HTCart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				252F67BC1ED94D7A00E5E5C8 /* Debug */,
+				252F67BD1ED94D7A00E5E5C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		252F67BE1ED94D7A00E5E5C8 /* Build configuration list for PBXNativeTarget "HTCart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				252F67BF1ED94D7A00E5E5C8 /* Debug */,
+				252F67C01ED94D7A00E5E5C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 252F679F1ED94D7A00E5E5C8 /* Project object */;
+}

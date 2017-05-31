@@ -1,0 +1,27 @@
+//
+//  HTCartPrefix.pch
+//  HTCart
+//
+//  Created by Huiting Mao on 2017/5/27.
+//  Copyright © 2017年 Martell. All rights reserved.
+//
+
+#ifndef HTCartPrefix_pch
+#define HTCartPrefix_pch
+
+// -- 尺寸宏
+#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+
+// -- 颜色宏
+#define RGBA(r,g,b,a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
+#define RGB(r,g,b) RGBA(r,g,b,1.0f)
+#define TABBAR_TEXT_NORMAL_COLOR RGB(164,164,164)
+#define TABBAR_TEXR_SELECTED_COLOR RGB(253,207,0)
+
+
+// -- 分类宏
+
+#import "UIButton+ImageTitleSpacing.h"
+
+#endif /* HTCartPrefix_pch */
