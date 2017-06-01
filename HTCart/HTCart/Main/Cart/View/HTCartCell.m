@@ -1,18 +1,27 @@
 //
-//  HTCartNormalCell.m
+//  HTCartCell.m
 //  HTCart
 //
 //  Created by Huiting Mao on 2017/5/31.
 //  Copyright © 2017年 Martell. All rights reserved.
 //
 
-#import "HTCartNormalCell.h"
+#import "HTCartCell.h"
 
-@implementation HTCartNormalCell
+@implementation HTCartCell
+
+//- (instancetype)initWithFrame:(CGRect)frame {
+//    if (self = [super initWithFrame:frame]) {
+//        [self awakeFromNib];
+//    }
+//    return self;
+//}
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.userInteractionEnabled = YES;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

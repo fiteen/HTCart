@@ -19,13 +19,15 @@
 		2569CEFF1EDE6DBE0091B2A9 /* HTCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2569CEFE1EDE6DBE0091B2A9 /* HTCollectionViewCell.m */; };
 		2569CF031EDE9D6D0091B2A9 /* HTCartBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2569CF021EDE9D6D0091B2A9 /* HTCartBottomView.m */; };
 		2569CF061EDEA2D20091B2A9 /* UILabel+TextAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 2569CF051EDEA2D20091B2A9 /* UILabel+TextAttribute.m */; };
-		2569CF0D1EDEC07C0091B2A9 /* HTCartNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2569CF0B1EDEC07C0091B2A9 /* HTCartNormalCell.m */; };
-		2569CF0E1EDEC07C0091B2A9 /* HTCartNormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2569CF0C1EDEC07C0091B2A9 /* HTCartNormalCell.xib */; };
+		2569CF0D1EDEC07C0091B2A9 /* HTCartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2569CF0B1EDEC07C0091B2A9 /* HTCartCell.m */; };
+		2569CF0E1EDEC07C0091B2A9 /* HTCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2569CF0C1EDEC07C0091B2A9 /* HTCartCell.xib */; };
 		2569CF101EDEC2400091B2A9 /* goodsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2569CF0F1EDEC2400091B2A9 /* goodsList.plist */; };
-		2569CF141EDEC43F0091B2A9 /* HTGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2569CF131EDEC43F0091B2A9 /* HTGoodsModel.m */; };
+		2569CF141EDEC43F0091B2A9 /* HTCartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2569CF131EDEC43F0091B2A9 /* HTCartModel.m */; };
+		77B2066A2D99DA730A3F8054 /* libPods-HTCart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A70EDA6F3143A4C9C75A91 /* libPods-HTCart.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		139EBFE721E754CD85BB215E /* Pods-HTCart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HTCart.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HTCart/Pods-HTCart.debug.xcconfig"; sourceTree = "<group>"; };
 		252F67A71ED94D7A00E5E5C8 /* HTCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HTCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		252F67AB1ED94D7A00E5E5C8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		252F67AD1ED94D7A00E5E5C8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../AppDelegate.h; sourceTree = "<group>"; };
@@ -49,12 +51,14 @@
 		2569CF021EDE9D6D0091B2A9 /* HTCartBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCartBottomView.m; sourceTree = "<group>"; };
 		2569CF041EDEA2D20091B2A9 /* UILabel+TextAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+TextAttribute.h"; sourceTree = "<group>"; };
 		2569CF051EDEA2D20091B2A9 /* UILabel+TextAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+TextAttribute.m"; sourceTree = "<group>"; };
-		2569CF0A1EDEC07C0091B2A9 /* HTCartNormalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCartNormalCell.h; sourceTree = "<group>"; };
-		2569CF0B1EDEC07C0091B2A9 /* HTCartNormalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCartNormalCell.m; sourceTree = "<group>"; };
-		2569CF0C1EDEC07C0091B2A9 /* HTCartNormalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HTCartNormalCell.xib; sourceTree = "<group>"; };
+		2569CF0A1EDEC07C0091B2A9 /* HTCartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCartCell.h; sourceTree = "<group>"; };
+		2569CF0B1EDEC07C0091B2A9 /* HTCartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCartCell.m; sourceTree = "<group>"; };
+		2569CF0C1EDEC07C0091B2A9 /* HTCartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HTCartCell.xib; sourceTree = "<group>"; };
 		2569CF0F1EDEC2400091B2A9 /* goodsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = goodsList.plist; sourceTree = "<group>"; };
-		2569CF121EDEC43F0091B2A9 /* HTGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTGoodsModel.h; sourceTree = "<group>"; };
-		2569CF131EDEC43F0091B2A9 /* HTGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTGoodsModel.m; sourceTree = "<group>"; };
+		2569CF121EDEC43F0091B2A9 /* HTCartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCartModel.h; sourceTree = "<group>"; };
+		2569CF131EDEC43F0091B2A9 /* HTCartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCartModel.m; sourceTree = "<group>"; };
+		26A70EDA6F3143A4C9C75A91 /* libPods-HTCart.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HTCart.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D15ECFFBBACBE28647218EF /* Pods-HTCart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HTCart.release.xcconfig"; path = "Pods/Target Support Files/Pods-HTCart/Pods-HTCart.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77B2066A2D99DA730A3F8054 /* libPods-HTCart.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +78,8 @@
 			children = (
 				252F67A91ED94D7A00E5E5C8 /* HTCart */,
 				252F67A81ED94D7A00E5E5C8 /* Products */,
+				EC7DDC3C5C25E21DA5B5B69E /* Pods */,
+				2EBE9B0EB34205853B12DF55 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -199,9 +206,9 @@
 			children = (
 				2569CF011EDE9D6D0091B2A9 /* HTCartBottomView.h */,
 				2569CF021EDE9D6D0091B2A9 /* HTCartBottomView.m */,
-				2569CF0A1EDEC07C0091B2A9 /* HTCartNormalCell.h */,
-				2569CF0B1EDEC07C0091B2A9 /* HTCartNormalCell.m */,
-				2569CF0C1EDEC07C0091B2A9 /* HTCartNormalCell.xib */,
+				2569CF0A1EDEC07C0091B2A9 /* HTCartCell.h */,
+				2569CF0B1EDEC07C0091B2A9 /* HTCartCell.m */,
+				2569CF0C1EDEC07C0091B2A9 /* HTCartCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -209,10 +216,27 @@
 		2569CF111EDEC4260091B2A9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2569CF121EDEC43F0091B2A9 /* HTGoodsModel.h */,
-				2569CF131EDEC43F0091B2A9 /* HTGoodsModel.m */,
+				2569CF121EDEC43F0091B2A9 /* HTCartModel.h */,
+				2569CF131EDEC43F0091B2A9 /* HTCartModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2EBE9B0EB34205853B12DF55 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				26A70EDA6F3143A4C9C75A91 /* libPods-HTCart.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EC7DDC3C5C25E21DA5B5B69E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				139EBFE721E754CD85BB215E /* Pods-HTCart.debug.xcconfig */,
+				4D15ECFFBBACBE28647218EF /* Pods-HTCart.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,9 +246,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 252F67BE1ED94D7A00E5E5C8 /* Build configuration list for PBXNativeTarget "HTCart" */;
 			buildPhases = (
+				A20656A1F97C17CDB50E5A16 /* [CP] Check Pods Manifest.lock */,
 				252F67A31ED94D7A00E5E5C8 /* Sources */,
 				252F67A41ED94D7A00E5E5C8 /* Frameworks */,
 				252F67A51ED94D7A00E5E5C8 /* Resources */,
+				2BE00CD4A99066BB036883B4 /* [CP] Embed Pods Frameworks */,
+				D650C201CBB791D8091B9507 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -274,7 +301,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2569CF0E1EDEC07C0091B2A9 /* HTCartNormalCell.xib in Resources */,
+				2569CF0E1EDEC07C0091B2A9 /* HTCartCell.xib in Resources */,
 				252F67BA1ED94D7A00E5E5C8 /* LaunchScreen.storyboard in Resources */,
 				252F67B71ED94D7A00E5E5C8 /* Assets.xcassets in Resources */,
 				252F67B51ED94D7A00E5E5C8 /* Main.storyboard in Resources */,
@@ -283,6 +310,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2BE00CD4A99066BB036883B4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HTCart/Pods-HTCart-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A20656A1F97C17CDB50E5A16 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D650C201CBB791D8091B9507 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HTCart/Pods-HTCart-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		252F67A31ED94D7A00E5E5C8 /* Sources */ = {
@@ -293,12 +368,12 @@
 				252F67B21ED94D7A00E5E5C8 /* HTHomeViewController.m in Sources */,
 				2569CF061EDEA2D20091B2A9 /* UILabel+TextAttribute.m in Sources */,
 				252F67AF1ED94D7A00E5E5C8 /* AppDelegate.m in Sources */,
-				2569CF141EDEC43F0091B2A9 /* HTGoodsModel.m in Sources */,
+				2569CF141EDEC43F0091B2A9 /* HTCartModel.m in Sources */,
 				2569CF031EDE9D6D0091B2A9 /* HTCartBottomView.m in Sources */,
 				252F67D11ED96A2E00E5E5C8 /* HTCartViewController.m in Sources */,
 				252F67C41ED9571700E5E5C8 /* HTTabBarViewController.m in Sources */,
 				252F67CD1ED95DE600E5E5C8 /* UIButton+ImageTitleSpacing.m in Sources */,
-				2569CF0D1EDEC07C0091B2A9 /* HTCartNormalCell.m in Sources */,
+				2569CF0D1EDEC07C0091B2A9 /* HTCartCell.m in Sources */,
 				252F67AC1ED94D7A00E5E5C8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -421,6 +496,7 @@
 		};
 		252F67BF1ED94D7A00E5E5C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 139EBFE721E754CD85BB215E /* Pods-HTCart.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5YDLJAV22H;
@@ -435,6 +511,7 @@
 		};
 		252F67C01ED94D7A00E5E5C8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4D15ECFFBBACBE28647218EF /* Pods-HTCart.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5YDLJAV22H;

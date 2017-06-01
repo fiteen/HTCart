@@ -12,6 +12,8 @@
 // -- 尺寸宏
 #define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+#define NAVIGATIONBAR_HEIGHT 64
+#define TABBAR_HEIGHT 49
 
 // -- 颜色宏
 #define RGBA(r,g,b,a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
@@ -25,5 +27,8 @@
 
 #import "UIButton+ImageTitleSpacing.h"
 #import "UILabel+TextAttribute.h"
+
+// -- pod
+#import <MJExtension.h>
 
 #endif /* HTCartPrefix_pch */

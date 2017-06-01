@@ -9,11 +9,15 @@
 #import "HTHomeViewController.h"
 #import "HTCartViewController.h"
 #import "HTCollectionViewCell.h"
+#import "HTCartModel.h"
 
 @interface HTHomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic, strong) UICollectionView *collectionView;
+
+/** 商品列表 */
+@property (nonatomic, strong) NSArray *goodsArr;
 
 @end
 
@@ -48,6 +52,13 @@ static const CGFloat kLinePadding = 10;         // 不同行之间的间距
     return _collectionView;
 }
 
+- (NSArray *)goodsArr {
+    if (!_goodsArr) {
+        _goodsArr = [HTCartModel mj_objectArrayWithFilename:@"goodsList.plist"];
+    }
+    return _goodsArr;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -66,13 +77,14 @@ static const CGFloat kLinePadding = 10;         // 不同行之间的间距
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 4;
+    return self.goodsArr.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    HTCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"homeCell" forIndexPath:indexPath];\
-    NSString *imageName = [@"goods" stringByAppendingString:[@(indexPath.row + 1) stringValue]];
-    cell.imageView.image = [UIImage imageNamed:imageName];
+    HTCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"homeCell" forIndexPath:indexPath];
+    HTCartModel *goodsModel = _goodsArr[indexPath.row];
+    cell.imageView.image = [UIImage imageNamed:goodsModel.goods_image];
+    cell.priceLabel.text = [NSString stringWithFormat:@"💰%@",goodsModel.current_price];
     return cell;
 }
 
