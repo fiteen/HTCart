@@ -10,6 +10,9 @@
 
 @interface HTCartModel : NSObject
 
+/** 商品id */
+@property (nonatomic, copy) NSString *goods_id;
+
 /** 店铺名称 */
 @property (nonatomic, copy) NSString *shop_name;
 
@@ -20,9 +23,9 @@
 @property (nonatomic, copy) NSString *goods_image;
 
 /** 原价 */
-@property (nonatomic, assign) NSNumber *original_price;
+@property (nonatomic, copy) NSNumber *original_price;
 
 /** 现价 */
-@property (nonatomic, assign) NSNumber *current_price;
+@property (nonatomic, copy) NSNumber *current_price;
 
 @end

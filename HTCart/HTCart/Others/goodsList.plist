@@ -3,6 +3,8 @@
 <plist version="1.0">
 <array>
 	<dict>
+		<key>goods_id</key>
+		<string>1</string>
 		<key>shop_name</key>
 		<string>商品1旗舰店</string>
 		<key>goods_name</key>
@@ -15,6 +17,8 @@
 		<real>39.9</real>
 	</dict>
 	<dict>
+		<key>goods_id</key>
+		<string>2</string>
 		<key>shop_name</key>
 		<string>精品旗舰店</string>
 		<key>goods_name</key>
@@ -27,6 +31,8 @@
 		<real>58</real>
 	</dict>
 	<dict>
+		<key>goods_id</key>
+		<string>3</string>
 		<key>shop_name</key>
 		<string>精品旗舰店</string>
 		<key>goods_name</key>
@@ -39,6 +45,8 @@
 		<real>48.8</real>
 	</dict>
 	<dict>
+		<key>goods_id</key>
+		<string>4</string>
 		<key>shop_name</key>
 		<string>商品4旗舰店</string>
 		<key>goods_name</key>

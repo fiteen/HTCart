@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol HTHomeViewControllerDelegate <NSObject>
+
+- (void)refreshCart;
+
+@end
+
 @interface HTHomeViewController : UIViewController
 
+@property (nonatomic, weak) id <HTHomeViewControllerDelegate> delegate;
 
 @end
 

@@ -23,6 +23,8 @@
 		2569CF0E1EDEC07C0091B2A9 /* HTCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2569CF0C1EDEC07C0091B2A9 /* HTCartCell.xib */; };
 		2569CF101EDEC2400091B2A9 /* goodsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2569CF0F1EDEC2400091B2A9 /* goodsList.plist */; };
 		2569CF141EDEC43F0091B2A9 /* HTCartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2569CF131EDEC43F0091B2A9 /* HTCartModel.m */; };
+		259C9E5E1EE0F82300C7537F /* UITableView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 259C9E5D1EE0F82300C7537F /* UITableView+Placeholder.m */; };
+		259C9E621EE115BD00C7537F /* HTPlistTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 259C9E611EE115BD00C7537F /* HTPlistTool.m */; };
 		77B2066A2D99DA730A3F8054 /* libPods-HTCart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A70EDA6F3143A4C9C75A91 /* libPods-HTCart.a */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,10 @@
 		2569CF0F1EDEC2400091B2A9 /* goodsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = goodsList.plist; sourceTree = "<group>"; };
 		2569CF121EDEC43F0091B2A9 /* HTCartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCartModel.h; sourceTree = "<group>"; };
 		2569CF131EDEC43F0091B2A9 /* HTCartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCartModel.m; sourceTree = "<group>"; };
+		259C9E5C1EE0F82300C7537F /* UITableView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Placeholder.h"; sourceTree = "<group>"; };
+		259C9E5D1EE0F82300C7537F /* UITableView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Placeholder.m"; sourceTree = "<group>"; };
+		259C9E601EE115BD00C7537F /* HTPlistTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTPlistTool.h; sourceTree = "<group>"; };
+		259C9E611EE115BD00C7537F /* HTPlistTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTPlistTool.m; sourceTree = "<group>"; };
 		26A70EDA6F3143A4C9C75A91 /* libPods-HTCart.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HTCart.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D15ECFFBBACBE28647218EF /* Pods-HTCart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HTCart.release.xcconfig"; path = "Pods/Target Support Files/Pods-HTCart/Pods-HTCart.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +100,7 @@
 		252F67A91ED94D7A00E5E5C8 /* HTCart */ = {
 			isa = PBXGroup;
 			children = (
+				259C9E5F1EE114CE00C7537F /* Tools */,
 				252F67C61ED95A1300E5E5C8 /* Util */,
 				252F67C51ED9577900E5E5C8 /* Main */,
 				252F67C71ED95A2500E5E5C8 /* Others */,
@@ -136,6 +143,8 @@
 				252F67CC1ED95DE600E5E5C8 /* UIButton+ImageTitleSpacing.m */,
 				2569CF041EDEA2D20091B2A9 /* UILabel+TextAttribute.h */,
 				2569CF051EDEA2D20091B2A9 /* UILabel+TextAttribute.m */,
+				259C9E5C1EE0F82300C7537F /* UITableView+Placeholder.h */,
+				259C9E5D1EE0F82300C7537F /* UITableView+Placeholder.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -220,6 +229,15 @@
 				2569CF131EDEC43F0091B2A9 /* HTCartModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		259C9E5F1EE114CE00C7537F /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				259C9E601EE115BD00C7537F /* HTPlistTool.h */,
+				259C9E611EE115BD00C7537F /* HTPlistTool.m */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		2EBE9B0EB34205853B12DF55 /* Frameworks */ = {
@@ -367,6 +385,7 @@
 				2569CEFF1EDE6DBE0091B2A9 /* HTCollectionViewCell.m in Sources */,
 				252F67B21ED94D7A00E5E5C8 /* HTHomeViewController.m in Sources */,
 				2569CF061EDEA2D20091B2A9 /* UILabel+TextAttribute.m in Sources */,
+				259C9E621EE115BD00C7537F /* HTPlistTool.m in Sources */,
 				252F67AF1ED94D7A00E5E5C8 /* AppDelegate.m in Sources */,
 				2569CF141EDEC43F0091B2A9 /* HTCartModel.m in Sources */,
 				2569CF031EDE9D6D0091B2A9 /* HTCartBottomView.m in Sources */,
@@ -375,6 +394,7 @@
 				252F67CD1ED95DE600E5E5C8 /* UIButton+ImageTitleSpacing.m in Sources */,
 				2569CF0D1EDEC07C0091B2A9 /* HTCartCell.m in Sources */,
 				252F67AC1ED94D7A00E5E5C8 /* main.m in Sources */,
+				259C9E5E1EE0F82300C7537F /* UITableView+Placeholder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

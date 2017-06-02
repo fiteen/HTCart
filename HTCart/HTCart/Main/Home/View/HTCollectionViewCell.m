@@ -29,7 +29,7 @@
     [self addSubview:_priceLabel];
     
     _buyButton = [[UIButton alloc] initWithFrame:CGRectMake(30, width + 60, width, 40)];
-    [_buyButton setTitle:@"购买" forState:UIControlStateNormal];
+    [_buyButton setTitle:@"加入购物车" forState:UIControlStateNormal];
     [_buyButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self addSubview:_buyButton];
 }

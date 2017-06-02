@@ -10,14 +10,19 @@
 #import "HTCartViewController.h"
 #import "HTCollectionViewCell.h"
 #import "HTCartModel.h"
+#define TAG_BTN 0x0100
 
 @interface HTHomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
+
 @property (nonatomic, strong) UICollectionView *collectionView;
 
 /** 商品列表 */
 @property (nonatomic, strong) NSArray *goodsArr;
+
+/** 购物车清单本地存储地址 */
+@property (nonatomic, strong) NSString *path;
 
 @end
 
@@ -59,19 +64,20 @@ static const CGFloat kLinePadding = 10;         // 不同行之间的间距
     return _goodsArr;
 }
 
+- (NSString *)path {
+    if (!_path) {
+        _path = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"cart.plist"];
+        NSLog(@"文件路径%@",_path);
+    }
+    return _path;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"商城";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tabbar_cart_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoCartVC)];
     self.collectionView.hidden = NO;
-}
-
-#pragma mark - SEL
-- (void)gotoCartVC {
-    HTCartViewController *cartVC = [HTCartViewController new];
-    cartVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:cartVC animated:YES];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -85,7 +91,41 @@ static const CGFloat kLinePadding = 10;         // 不同行之间的间距
     HTCartModel *goodsModel = _goodsArr[indexPath.row];
     cell.imageView.image = [UIImage imageNamed:goodsModel.goods_image];
     cell.priceLabel.text = [NSString stringWithFormat:@"💰%@",goodsModel.current_price];
+    cell.buyButton.tag = TAG_BTN + indexPath.row;
+    [cell.buyButton addTarget:self action:@selector(addToCart:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
+}
+
+#pragma mark - SEL
+- (void)gotoCartVC {
+    HTCartViewController *cartVC = [HTCartViewController new];
+    cartVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:cartVC animated:YES];
+}
+
+- (void)addToCart:(UIButton *)button {
+    HTCartModel *goodsModel = _goodsArr[button.tag - TAG_BTN];
+    NSMutableDictionary *goodsDic = [goodsModel mj_JSONObject];
+    NSMutableArray *goodsArr = [HTPlistTool readPlistArrayWithPath:self.path];
+    BOOL hasEqual = NO;
+    for (NSMutableDictionary *dic in goodsArr) {
+        if ([[dic valueForKey:@"goods_id"] isEqualToString:goodsModel.goods_id]) {
+            hasEqual = YES;
+            long count = [[dic valueForKey:@"goods_count"] longValue];
+            [dic setValue:@(count + 1) forKey:@"goods_count"];
+            [HTPlistTool writeDataToPlist:self.path withArr:goodsArr];
+            NSLog(@"%@",dic);
+        }
+    }
+    if (!hasEqual) {
+        [goodsDic setValue:@(1) forKey:@"goods_count"];
+        [goodsArr addObject:goodsDic];
+        NSLog(@"%@",goodsDic);
+        [HTPlistTool writeDataToPlist:self.path withArr:goodsArr];
+    }
+    if ([self.delegate respondsToSelector:@selector(refreshCart)]) {
+        [self.delegate refreshCart];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

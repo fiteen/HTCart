@@ -7,16 +7,20 @@
 //
 
 #import "HTCartViewController.h"
+#import "HTHomeViewController.h"
 #import "HTCartBottomView.h"
 #import "HTCartCell.h"
 
-@interface HTCartViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface HTCartViewController ()<UITableViewDelegate,UITableViewDataSource,HTHomeViewControllerDelegate> {
+    /** 购物车清单 */
+    NSMutableArray *_cartArray;
+}
 
 /** 底部界面-全选/合计/结算 */
 @property (nonatomic, strong) HTCartBottomView *bottomView;
 
-/** 购物车清单 */
-@property (nonatomic, strong) NSArray *cartArray;
+/** 购物车清单本地存储地址 */
+@property (nonatomic, strong) NSString *path;
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -45,11 +49,12 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     return _bottomView;
 }
 
-- (NSArray *)cartArray {
-    if (!_cartArray) {
-        
+- (NSString *)path {
+    if (!_path) {
+        _path = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"cart.plist"];
+        NSLog(@"文件路径%@",_path);
     }
-    return _cartArray;
+    return _path;
 }
 
 - (UITableView *)tableView {
@@ -70,27 +75,59 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initView];
+}
+
+- (void)initView {
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"购物车";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editGoods)];
     self.bottomView.hidden = NO;
+    _cartArray = [HTPlistTool readPlistArrayWithPath:self.path];
     self.tableView.tableFooterView = [UIView new];
+    [self.tableView placeholderBaseOnNumber:_cartArray.count iconConfig:^(UIImageView *imageView) {
+        imageView.image = [UIImage imageNamed:@"no_goods_placeholder"];
+    } textConfig:^(UILabel *label) {
+        label.text = @"购物车竟然是空的";
+        label.textColor = TEXT_GRAY_COLOR;
+        label.font = [UIFont systemFontOfSize:15];
+    }];
+    UINavigationController *navi = self.tabBarController.viewControllers[0];
+    HTHomeViewController *homeVC = navi.viewControllers.firstObject;
+    homeVC.delegate = self;
 }
 
 #pragma mark - TableViewDelegate&TableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.cartArray.count;
+    return _cartArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HTCartCell *cell = [tableView dequeueReusableCellWithIdentifier:HTCartNormalCellId];
+    NSDictionary *cartDic = _cartArray[indexPath.row];
+    cell.goodsImage.image = [UIImage imageNamed:[cartDic valueForKey:@"goods_image"]];
+    cell.nameLabel.text = [cartDic valueForKey:@"goods_name"];
+    cell.countLabel.text = [NSString stringWithFormat:@"x%ld",[[cartDic valueForKey:@"goods_count"] longValue]];
     [cell.chooseButton addTarget:self action:@selector(clickSingleChooseButton:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 80;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [UIView new];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
+}
+
+#pragma mark - HTHomeViewControllerDelegate
+- (void)refreshCart {
+    [self.tableView reloadData];
 }
 
 #pragma mark - SEL

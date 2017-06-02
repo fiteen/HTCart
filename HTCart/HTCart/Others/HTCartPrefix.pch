@@ -22,11 +22,16 @@
 #define TABBAR_TEXT_SELECTED_COLOR RGB(253,207,0)
 #define TEXT_BLACK_COLOR RGB(101,101,101)
 #define BUTTON_RED_COLOR RGB(24,117,255)
+#define TEXT_GRAY_COLOR  RGB(153, 153, 153)
 
 // -- 分类宏
 
 #import "UIButton+ImageTitleSpacing.h"
 #import "UILabel+TextAttribute.h"
+#import "UITableView+Placeholder.h"
+
+// -- 工具宏
+#import "HTPlistTool.h"
 
 // -- pod
 #import <MJExtension.h>
