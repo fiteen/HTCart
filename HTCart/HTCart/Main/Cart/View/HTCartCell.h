@@ -10,13 +10,13 @@
 
 @interface HTCartCell : UITableViewCell
 
-/* 选择按钮 **/
+/** 选择按钮 */
 @property (weak, nonatomic) IBOutlet UIButton *chooseButton;
 /** 商品图片 */
 @property (weak, nonatomic) IBOutlet UIImageView *goodsImage;
-/* 商品名称 **/
+/** 商品名称 */
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-/* 商品数量 **/
+/** 商品数量 */
 @property (weak, nonatomic) IBOutlet UILabel *countLabel;
 
 @end

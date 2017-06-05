@@ -23,6 +23,8 @@
 		2569CF0E1EDEC07C0091B2A9 /* HTCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2569CF0C1EDEC07C0091B2A9 /* HTCartCell.xib */; };
 		2569CF101EDEC2400091B2A9 /* goodsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2569CF0F1EDEC2400091B2A9 /* goodsList.plist */; };
 		2569CF141EDEC43F0091B2A9 /* HTCartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2569CF131EDEC43F0091B2A9 /* HTCartModel.m */; };
+		2575F8271EE4F6B700C84A6D /* HTGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2575F8261EE4F6B700C84A6D /* HTGoodsModel.m */; };
+		2575F82A1EE5507C00C84A6D /* HTCartSectionTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2575F8291EE5507C00C84A6D /* HTCartSectionTitleView.m */; };
 		259C9E5E1EE0F82300C7537F /* UITableView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 259C9E5D1EE0F82300C7537F /* UITableView+Placeholder.m */; };
 		259C9E621EE115BD00C7537F /* HTPlistTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 259C9E611EE115BD00C7537F /* HTPlistTool.m */; };
 		77B2066A2D99DA730A3F8054 /* libPods-HTCart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A70EDA6F3143A4C9C75A91 /* libPods-HTCart.a */; };
@@ -59,6 +61,10 @@
 		2569CF0F1EDEC2400091B2A9 /* goodsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = goodsList.plist; sourceTree = "<group>"; };
 		2569CF121EDEC43F0091B2A9 /* HTCartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCartModel.h; sourceTree = "<group>"; };
 		2569CF131EDEC43F0091B2A9 /* HTCartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCartModel.m; sourceTree = "<group>"; };
+		2575F8251EE4F6B700C84A6D /* HTGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTGoodsModel.h; sourceTree = "<group>"; };
+		2575F8261EE4F6B700C84A6D /* HTGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTGoodsModel.m; sourceTree = "<group>"; };
+		2575F8281EE5507C00C84A6D /* HTCartSectionTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCartSectionTitleView.h; sourceTree = "<group>"; };
+		2575F8291EE5507C00C84A6D /* HTCartSectionTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCartSectionTitleView.m; sourceTree = "<group>"; };
 		259C9E5C1EE0F82300C7537F /* UITableView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Placeholder.h"; sourceTree = "<group>"; };
 		259C9E5D1EE0F82300C7537F /* UITableView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Placeholder.m"; sourceTree = "<group>"; };
 		259C9E601EE115BD00C7537F /* HTPlistTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTPlistTool.h; sourceTree = "<group>"; };
@@ -167,6 +173,7 @@
 		252F67C81ED95A7300E5E5C8 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				2575F8241EE4F6A500C84A6D /* Model */,
 				2569CEFC1EDE61EE0091B2A9 /* View */,
 				2569CEFB1EDE61EE0091B2A9 /* Controller */,
 			);
@@ -218,6 +225,8 @@
 				2569CF0A1EDEC07C0091B2A9 /* HTCartCell.h */,
 				2569CF0B1EDEC07C0091B2A9 /* HTCartCell.m */,
 				2569CF0C1EDEC07C0091B2A9 /* HTCartCell.xib */,
+				2575F8281EE5507C00C84A6D /* HTCartSectionTitleView.h */,
+				2575F8291EE5507C00C84A6D /* HTCartSectionTitleView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -227,6 +236,15 @@
 			children = (
 				2569CF121EDEC43F0091B2A9 /* HTCartModel.h */,
 				2569CF131EDEC43F0091B2A9 /* HTCartModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2575F8241EE4F6A500C84A6D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2575F8251EE4F6B700C84A6D /* HTGoodsModel.h */,
+				2575F8261EE4F6B700C84A6D /* HTGoodsModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -392,6 +410,8 @@
 				252F67D11ED96A2E00E5E5C8 /* HTCartViewController.m in Sources */,
 				252F67C41ED9571700E5E5C8 /* HTTabBarViewController.m in Sources */,
 				252F67CD1ED95DE600E5E5C8 /* UIButton+ImageTitleSpacing.m in Sources */,
+				2575F8271EE4F6B700C84A6D /* HTGoodsModel.m in Sources */,
+				2575F82A1EE5507C00C84A6D /* HTCartSectionTitleView.m in Sources */,
 				2569CF0D1EDEC07C0091B2A9 /* HTCartCell.m in Sources */,
 				252F67AC1ED94D7A00E5E5C8 /* main.m in Sources */,
 				259C9E5E1EE0F82300C7537F /* UITableView+Placeholder.m in Sources */,

@@ -27,7 +27,6 @@
 }
 
 /* 将字典从数组中删除，然后更新plist **/
-
 + (void)deletePlistDicInArrWithPath:(NSString *)path withMutDic:(NSMutableDictionary *)mutDic {
     NSMutableArray *arr = [self readPlistArrayWithPath:path];
     [arr removeObject:mutDic];

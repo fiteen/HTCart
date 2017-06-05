@@ -1,14 +1,14 @@
 //
-//  HTCartModel.h
+//  HTGoodsModel.h
 //  HTCart
 //
-//  Created by Huiting Mao on 2017/5/31.
+//  Created by Huiting Mao on 2017/6/5.
 //  Copyright © 2017年 Martell. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface HTCartModel : NSObject
+@interface HTGoodsModel : NSObject
 
 /** 商品id */
 @property (nonatomic, copy) NSString *goods_id;
@@ -30,11 +30,5 @@
 
 /** 现价 */
 @property (nonatomic, copy) NSNumber *current_price;
-
-/** 商品数量 */
-@property (nonatomic, copy) NSNumber *goods_count;
-
-/** 是否选择 */
-@property (nonatomic, assign) BOOL chooseState;
 
 @end

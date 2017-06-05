@@ -9,7 +9,7 @@
 #import "HTHomeViewController.h"
 #import "HTCartViewController.h"
 #import "HTCollectionViewCell.h"
-#import "HTCartModel.h"
+#import "HTGoodsModel.h"
 #define TAG_BTN 0x0100
 
 @interface HTHomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
@@ -59,7 +59,7 @@ static const CGFloat kLinePadding = 10;         // 不同行之间的间距
 
 - (NSArray *)goodsArr {
     if (!_goodsArr) {
-        _goodsArr = [HTCartModel mj_objectArrayWithFilename:@"goodsList.plist"];
+        _goodsArr = [HTGoodsModel mj_objectArrayWithFilename:@"goodsList.plist"];
     }
     return _goodsArr;
 }
@@ -88,7 +88,7 @@ static const CGFloat kLinePadding = 10;         // 不同行之间的间距
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     HTCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"homeCell" forIndexPath:indexPath];
-    HTCartModel *goodsModel = _goodsArr[indexPath.row];
+    HTGoodsModel *goodsModel = _goodsArr[indexPath.row];
     cell.imageView.image = [UIImage imageNamed:goodsModel.goods_image];
     cell.priceLabel.text = [NSString stringWithFormat:@"💰%@",goodsModel.current_price];
     cell.buyButton.tag = TAG_BTN + indexPath.row;
@@ -104,24 +104,40 @@ static const CGFloat kLinePadding = 10;         // 不同行之间的间距
 }
 
 - (void)addToCart:(UIButton *)button {
-    HTCartModel *goodsModel = _goodsArr[button.tag - TAG_BTN];
-    NSMutableDictionary *goodsDic = [goodsModel mj_JSONObject];
-    NSMutableArray *goodsArr = [HTPlistTool readPlistArrayWithPath:self.path];
-    BOOL hasEqual = NO;
-    for (NSMutableDictionary *dic in goodsArr) {
-        if ([[dic valueForKey:@"goods_id"] isEqualToString:goodsModel.goods_id]) {
-            hasEqual = YES;
-            long count = [[dic valueForKey:@"goods_count"] longValue];
-            [dic setValue:@(count + 1) forKey:@"goods_count"];
-            [HTPlistTool writeDataToPlist:self.path withArr:goodsArr];
-            NSLog(@"%@",dic);
+    HTGoodsModel *goodsModel = _goodsArr[button.tag - TAG_BTN];
+//    NSMutableDictionary *goodsDic = [goodsModel mj_JSONObject];
+    NSMutableArray *cartArray = [HTPlistTool readPlistArrayWithPath:self.path];
+    BOOL hasEqualGoods = NO;
+    BOOL hasEqualShop = NO;
+    for (NSMutableDictionary *shopDic in cartArray) {
+        NSMutableArray *goodsArr = [shopDic valueForKey:@"goods"];
+        // 是否有属于相同商铺的商品
+        if ([[shopDic valueForKey:@"shop_id"] isEqualToString:goodsModel.shop_id]) {
+            for (NSMutableDictionary *goodsDic in goodsArr) {
+                if ([[goodsDic valueForKey:@"goods_id"] isEqualToString:goodsModel.goods_id]) {
+                    hasEqualGoods = YES;
+                    hasEqualShop = YES;
+                    long count = [[goodsDic valueForKey:@"goods_count"] longValue];
+                    [goodsDic setValue:@(count + 1) forKey:@"goods_count"];
+                } else {
+                    NSMutableDictionary *newCartDic = [goodsModel mj_keyValues];
+                    [newCartDic setValue:@(1) forKey:@"goods_count"];
+                    [goodsArr addObject:newCartDic];
+                }
+                [HTPlistTool writeDataToPlist:self.path withArr:cartArray];
+                NSLog(@"%@",cartArray);
+            }
         }
     }
-    if (!hasEqual) {
-        [goodsDic setValue:@(1) forKey:@"goods_count"];
-        [goodsArr addObject:goodsDic];
-        NSLog(@"%@",goodsDic);
-        [HTPlistTool writeDataToPlist:self.path withArr:goodsArr];
+    if (!hasEqualGoods) {
+        NSMutableDictionary *newCartDic = [NSMutableDictionary dictionaryWithDictionary:@{@"shop_id":goodsModel.shop_id,@"shop_name":goodsModel.shop_name}];
+//        NSMutableArray *goodsArr =
+//        if ([[goodsDic valueForKey:@"goods_id"] isEqualToString:goodsModel.goods_id]) {
+//            [goodsDic setValue:@(1) forKey:@"goods_count"];
+//            [goodsArr addObject:goodsDic];
+//            [HTPlistTool writeDataToPlist:self.path withArr:cartArray];
+//            NSLog(@"%@",cartArray);
+//        }
     }
     if ([self.delegate respondsToSelector:@selector(refreshCart)]) {
         [self.delegate refreshCart];

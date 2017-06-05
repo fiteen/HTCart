@@ -4,7 +4,9 @@
 <array>
 	<dict>
 		<key>goods_id</key>
-		<string>1</string>
+		<string>g1</string>
+		<key>shop_id</key>
+		<string>s1</string>
 		<key>shop_name</key>
 		<string>商品1旗舰店</string>
 		<key>goods_name</key>
@@ -18,7 +20,9 @@
 	</dict>
 	<dict>
 		<key>goods_id</key>
-		<string>2</string>
+		<string>g2</string>
+		<key>shop_id</key>
+		<string>s2</string>
 		<key>shop_name</key>
 		<string>精品旗舰店</string>
 		<key>goods_name</key>
@@ -32,7 +36,9 @@
 	</dict>
 	<dict>
 		<key>goods_id</key>
-		<string>3</string>
+		<string>g3</string>
+		<key>shop_id</key>
+		<string>s2</string>
 		<key>shop_name</key>
 		<string>精品旗舰店</string>
 		<key>goods_name</key>
@@ -46,7 +52,9 @@
 	</dict>
 	<dict>
 		<key>goods_id</key>
-		<string>4</string>
+		<string>g4</string>
+		<key>shop_id</key>
+		<string>s4</string>
 		<key>shop_name</key>
 		<string>商品4旗舰店</string>
 		<key>goods_name</key>

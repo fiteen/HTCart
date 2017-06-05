@@ -8,12 +8,16 @@
 
 #import "HTCartViewController.h"
 #import "HTHomeViewController.h"
-#import "HTCartBottomView.h"
+#import "HTCartModel.h"
+#import "HTCartSectionTitleView.h"
 #import "HTCartCell.h"
+#import "HTCartBottomView.h"
 
 @interface HTCartViewController ()<UITableViewDelegate,UITableViewDataSource,HTHomeViewControllerDelegate> {
     /** 购物车清单 */
     NSMutableArray *_cartArray;
+    /** 选择总价 */
+    CGFloat _totalPrice;
 }
 
 /** 底部界面-全选/合计/结算 */
@@ -83,8 +87,9 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     self.navigationItem.title = @"购物车";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editGoods)];
     self.bottomView.hidden = NO;
-    _cartArray = [HTPlistTool readPlistArrayWithPath:self.path];
     self.tableView.tableFooterView = [UIView new];
+    
+    _cartArray = [HTPlistTool readPlistArrayWithPath:self.path];
     [self.tableView placeholderBaseOnNumber:_cartArray.count iconConfig:^(UIImageView *imageView) {
         imageView.image = [UIImage imageNamed:@"no_goods_placeholder"];
     } textConfig:^(UILabel *label) {
@@ -99,16 +104,26 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 
 #pragma mark - TableViewDelegate&TableViewDataSource
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return _cartArray.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSDictionary *dic = _cartArray[section];
+    NSArray *goodsArr = [dic valueForKey:@"goods"];
+    return goodsArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HTCartCell *cell = [tableView dequeueReusableCellWithIdentifier:HTCartNormalCellId];
-    NSDictionary *cartDic = _cartArray[indexPath.row];
-    cell.goodsImage.image = [UIImage imageNamed:[cartDic valueForKey:@"goods_image"]];
-    cell.nameLabel.text = [cartDic valueForKey:@"goods_name"];
-    cell.countLabel.text = [NSString stringWithFormat:@"x%ld",[[cartDic valueForKey:@"goods_count"] longValue]];
+    NSDictionary *dic = _cartArray[indexPath.section];
+    NSArray *goodsArr = [dic valueForKey:@"goods"];
+    HTCartModel *cartModel = [HTCartModel mj_objectWithKeyValues:goodsArr[indexPath.row]];
+    cell.goodsImage.image = [UIImage imageNamed:cartModel.goods_image];
+    cell.nameLabel.text = cartModel.goods_name;
+    cell.countLabel.text = [NSString stringWithFormat:@"x%@",cartModel.goods_count];
+    cell.chooseButton.tag = indexPath.row;
+    cell.chooseButton.selected = cartModel.chooseState;
     [cell.chooseButton addTarget:self action:@selector(clickSingleChooseButton:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
@@ -118,15 +133,19 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return [UIView new];
+    NSDictionary *dic = _cartArray[section];
+    HTCartSectionTitleView *view = [HTCartSectionTitleView new];
+    [view.shopButton setTitle:[dic valueForKey:@"shop_name"] forState:UIControlStateNormal];
+    return view;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10;
+    return 20;
 }
 
 #pragma mark - HTHomeViewControllerDelegate
 - (void)refreshCart {
+    _cartArray = [HTPlistTool readPlistArrayWithPath:self.path];
     [self.tableView reloadData];
 }
 
@@ -136,23 +155,43 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     
 }
 
+// 全选按钮
 - (void)clickAllChooseButton:(UIButton *)button {
     button.selected = !button.selected;
-    
-    //    for (int i = 0; i < self.contentArray.count; i++) {
-    //        YZLCartContentModel *contentModel = self.contentArray[i];
-    //        contentModel.selectState = button.selected;
-    //    }
-    //    [self.tableView reloadData];
-    //    [self updateCartBottomView];
+    for (HTCartModel *cartModel in _cartArray) {
+        cartModel.chooseState = button.selected;
+    }
+    [self.tableView reloadData];
+    [self updateBottomView];
+}
+
+// 单选
+- (void)clickSingleChooseButton:(UIButton *)button {
+    button.selected = !button.selected;
+    HTCartModel *cartModel = _cartArray[button.tag];
+    cartModel.chooseState = button.selected;
+    BOOL allChoosen = YES;
+    for (HTCartModel *model in _cartArray) {
+        allChoosen = allChoosen && model.chooseState;
+    }
+    self.bottomView.allChooseButton.selected = allChoosen;
+    [self updateBottomView];
 }
 
 - (void)clickSettleButton:(UIButton *)button {
-    
+    NSLog(@"结算");
 }
 
-- (void)clickSingleChooseButton:(UIButton *)button {
-    button.selected = !button.selected;
+// 修改底部信息
+- (void)updateBottomView {
+    _totalPrice = 0;
+    for (HTCartModel *cartModel in _cartArray) {
+        if (cartModel.chooseState) {
+            _totalPrice += [cartModel.goods_count longValue] *[cartModel.current_price floatValue];
+        }
+    }
+    self.bottomView.totalLabel.text = [NSString stringWithFormat:@"合计：¥%.2f",_totalPrice];
+    [self.bottomView.totalLabel setLabelText:self.bottomView.totalLabel.text Color:TEXT_BLACK_COLOR Range:NSMakeRange(0, 3)];
 }
 
 - (void)didReceiveMemoryWarning {
