@@ -18,6 +18,11 @@
 }
 
 - (void)setUpSubviews {
+    self.backgroundColor = [UIColor whiteColor];
+    
+    self.layer.borderColor = BACKGROUND_GRAY_COLOR.CGColor;
+    self.layer.borderWidth = 1.0f;
+    
     _chooseButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 5, 20, 20)];
     [_chooseButton setBackgroundImage:[UIImage imageNamed:@"icon_orderpay_normal"] forState:UIControlStateNormal];
     [_chooseButton setBackgroundImage:[UIImage imageNamed:@"icon_orderpay_selected"] forState:UIControlStateSelected];

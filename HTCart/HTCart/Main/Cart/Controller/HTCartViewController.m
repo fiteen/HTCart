@@ -12,6 +12,8 @@
 #import "HTCartSectionTitleView.h"
 #import "HTCartCell.h"
 #import "HTCartBottomView.h"
+#define TAG_CELLBTN 0x1000
+#define TAG_HEADERBTN 0x0100
 
 @interface HTCartViewController ()<UITableViewDelegate,UITableViewDataSource,HTHomeViewControllerDelegate> {
     /** 购物车清单 */
@@ -69,8 +71,12 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
         } else {
             _tableView.frame = CGRectMake(0, NAVIGATIONBAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT - bottomViewHeight);
         }
+        _tableView.tableFooterView = [UIView new];
+        _tableView.backgroundColor = [UIColor clearColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+        [_tableView setSeparatorColor:BACKGROUND_GRAY_COLOR];
         [_tableView registerNib:[UINib nibWithNibName:@"HTCartCell" bundle:nil] forCellReuseIdentifier:HTCartNormalCellId];
         [self.view addSubview:_tableView];
     }
@@ -83,20 +89,13 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 - (void)initView {
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = BACKGROUND_GRAY_COLOR;
     self.navigationItem.title = @"购物车";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editGoods)];
     self.bottomView.hidden = NO;
-    self.tableView.tableFooterView = [UIView new];
     
-    _cartArray = [HTPlistTool readPlistArrayWithPath:self.path];
-    [self.tableView placeholderBaseOnNumber:_cartArray.count iconConfig:^(UIImageView *imageView) {
-        imageView.image = [UIImage imageNamed:@"no_goods_placeholder"];
-    } textConfig:^(UILabel *label) {
-        label.text = @"购物车竟然是空的";
-        label.textColor = TEXT_GRAY_COLOR;
-        label.font = [UIFont systemFontOfSize:15];
-    }];
+    [self refreshCart];
+    
     UINavigationController *navi = self.tabBarController.viewControllers[0];
     HTHomeViewController *homeVC = navi.viewControllers.firstObject;
     homeVC.delegate = self;
@@ -116,14 +115,12 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HTCartCell *cell = [tableView dequeueReusableCellWithIdentifier:HTCartNormalCellId];
-    NSDictionary *dic = _cartArray[indexPath.section];
-    NSArray *goodsArr = [dic valueForKey:@"goods"];
-    HTCartModel *cartModel = [HTCartModel mj_objectWithKeyValues:goodsArr[indexPath.row]];
-    cell.goodsImage.image = [UIImage imageNamed:cartModel.goods_image];
-    cell.nameLabel.text = cartModel.goods_name;
-    cell.countLabel.text = [NSString stringWithFormat:@"x%@",cartModel.goods_count];
-    cell.chooseButton.tag = indexPath.row;
-    cell.chooseButton.selected = cartModel.chooseState;
+    HTCartModel *cartModel = _cartArray[indexPath.section];
+    cell.goodsImage.image = [UIImage imageNamed:cartModel.goods[indexPath.row].goods_image];
+    cell.nameLabel.text = cartModel.goods[indexPath.row].goods_name;
+    cell.countLabel.text = [NSString stringWithFormat:@"x%@",cartModel.goods[indexPath.row].goods_count];
+    cell.chooseButton.tag = indexPath.section * TAG_CELLBTN + indexPath.row;
+    cell.chooseButton.selected = cartModel.goods[indexPath.row].chooseState;
     [cell.chooseButton addTarget:self action:@selector(clickSingleChooseButton:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
@@ -133,19 +130,45 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    NSDictionary *dic = _cartArray[section];
     HTCartSectionTitleView *view = [HTCartSectionTitleView new];
-    [view.shopButton setTitle:[dic valueForKey:@"shop_name"] forState:UIControlStateNormal];
+    HTCartModel *cartModel = _cartArray[section];
+    view.chooseButton.selected = cartModel.chooseState;
+    view.chooseButton.tag = TAG_HEADERBTN + section;
+    [view.chooseButton addTarget:self action:@selector(clickShopAllChooseButton:) forControlEvents:UIControlEventTouchUpInside];
+    [view.shopButton setTitle:cartModel.shop_name forState:UIControlStateNormal];
+    return view;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *view = [UIView new];
+    view.backgroundColor = BACKGROUND_GRAY_COLOR;
     return view;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 20;
+    return 30;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 10;
 }
 
 #pragma mark - HTHomeViewControllerDelegate
 - (void)refreshCart {
-    _cartArray = [HTPlistTool readPlistArrayWithPath:self.path];
+    NSArray *plistArray = [[HTPlistTool readPlistArrayWithPath:self.path] mj_JSONObject];
+    _cartArray = [NSMutableArray array];
+    for (int i = 0; i < plistArray.count; i++) {
+        HTCartModel *cartModel = [HTCartModel mj_objectWithKeyValues:plistArray[i]];
+        [_cartArray addObject:cartModel];
+    }
+    
+    [self.tableView placeholderBaseOnNumber:_cartArray.count iconConfig:^(UIImageView *imageView) {
+        imageView.image = [UIImage imageNamed:@"no_goods_placeholder"];
+    } textConfig:^(UILabel *label) {
+        label.text = @"购物车竟然是空的";
+        label.textColor = TEXT_GRAY_COLOR;
+        label.font = [UIFont systemFontOfSize:15];
+    }];
     [self.tableView reloadData];
 }
 
@@ -155,26 +178,48 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     
 }
 
-// 全选按钮
+// 单选商品
+- (void)clickSingleChooseButton:(UIButton *)button {
+    button.selected = !button.selected;
+    HTCartModel *cartModel = _cartArray[button.tag / TAG_CELLBTN];
+    cartModel.goods[button.tag % TAG_CELLBTN].chooseState = button.selected;
+    BOOL shopAllChoose = YES;
+    for (HTCartDetailModel *detailModel in cartModel.goods) {
+        shopAllChoose &= detailModel.chooseState;
+    }
+    cartModel.chooseState = shopAllChoose;
+    [_tableView reloadData];
+    
+    BOOL allChoosen = YES;
+    for (HTCartModel *cartModel in _cartArray) {
+        allChoosen &= cartModel.chooseState;
+    }
+    self.bottomView.allChooseButton.selected = allChoosen;
+    [self updateBottomView];
+}
+
+// 全选某商铺所有商品
+- (void)clickShopAllChooseButton:(UIButton *)button {
+    button.selected = !button.selected;
+    HTCartModel *cartModel = _cartArray[button.tag - TAG_HEADERBTN];
+    cartModel.chooseState = button.selected;
+    for (HTCartDetailModel *detailModel in cartModel.goods) {
+        detailModel.chooseState = button.selected;
+    }
+    [_tableView reloadData];
+    [self updateBottomView];
+}
+
+// 全选商品
 - (void)clickAllChooseButton:(UIButton *)button {
     button.selected = !button.selected;
     for (HTCartModel *cartModel in _cartArray) {
         cartModel.chooseState = button.selected;
+        for (HTCartDetailModel *detailModel in cartModel.goods) {
+            detailModel.chooseState = button.selected;
+        }
     }
-    [self.tableView reloadData];
-    [self updateBottomView];
-}
-
-// 单选
-- (void)clickSingleChooseButton:(UIButton *)button {
-    button.selected = !button.selected;
-    HTCartModel *cartModel = _cartArray[button.tag];
-    cartModel.chooseState = button.selected;
-    BOOL allChoosen = YES;
-    for (HTCartModel *model in _cartArray) {
-        allChoosen = allChoosen && model.chooseState;
-    }
-    self.bottomView.allChooseButton.selected = allChoosen;
+    [_tableView reloadData];
     [self updateBottomView];
 }
 
@@ -186,8 +231,10 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 - (void)updateBottomView {
     _totalPrice = 0;
     for (HTCartModel *cartModel in _cartArray) {
-        if (cartModel.chooseState) {
-            _totalPrice += [cartModel.goods_count longValue] *[cartModel.current_price floatValue];
+        for (HTCartDetailModel *detailModel in cartModel.goods) {
+            if (detailModel.chooseState) {
+                _totalPrice += [detailModel.goods_count longValue] *[detailModel.current_price floatValue];
+            }
         }
     }
     self.bottomView.totalLabel.text = [NSString stringWithFormat:@"合计：¥%.2f",_totalPrice];

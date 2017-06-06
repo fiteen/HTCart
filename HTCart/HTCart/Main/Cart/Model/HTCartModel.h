@@ -8,19 +8,32 @@
 
 #import <Foundation/Foundation.h>
 
+@class HTCartDetailModel;
+
 @interface HTCartModel : NSObject
-
-/** 商品id */
-@property (nonatomic, copy) NSString *goods_id;
-
-/** 商品名称 */
-@property (nonatomic, copy) NSString *goods_name;
 
 /** 店铺id */
 @property (nonatomic, copy) NSString *shop_id;
 
 /** 店铺名称 */
 @property (nonatomic, copy) NSString *shop_name;
+
+/** 商品清单 */
+@property (nonatomic, copy) NSArray <HTCartDetailModel *> *goods;
+
+/** 是否选择 */
+@property (nonatomic, assign) BOOL chooseState;
+
+
+@end
+
+@interface HTCartDetailModel : NSObject
+
+/** 商品id */
+@property (nonatomic, copy) NSString *goods_id;
+
+/** 商品名称 */
+@property (nonatomic, copy) NSString *goods_name;
 
 /** 商品图片 */
 @property (nonatomic, copy) NSString *goods_image;

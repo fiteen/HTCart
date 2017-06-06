@@ -10,7 +10,7 @@
 #import "HTCartViewController.h"
 #import "HTCollectionViewCell.h"
 #import "HTGoodsModel.h"
-#define TAG_BTN 0x0100
+#define TAG_BTN 0x1000
 
 @interface HTHomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -105,10 +105,9 @@ static const CGFloat kLinePadding = 10;         // 不同行之间的间距
 
 - (void)addToCart:(UIButton *)button {
     HTGoodsModel *goodsModel = _goodsArr[button.tag - TAG_BTN];
-//    NSMutableDictionary *goodsDic = [goodsModel mj_JSONObject];
     NSMutableArray *cartArray = [HTPlistTool readPlistArrayWithPath:self.path];
-    BOOL hasEqualGoods = NO;
     BOOL hasEqualShop = NO;
+    BOOL hasEqualGoods = NO;
     for (NSMutableDictionary *shopDic in cartArray) {
         NSMutableArray *goodsArr = [shopDic valueForKey:@"goods"];
         // 是否有属于相同商铺的商品
@@ -116,28 +115,29 @@ static const CGFloat kLinePadding = 10;         // 不同行之间的间距
             for (NSMutableDictionary *goodsDic in goodsArr) {
                 if ([[goodsDic valueForKey:@"goods_id"] isEqualToString:goodsModel.goods_id]) {
                     hasEqualGoods = YES;
-                    hasEqualShop = YES;
-                    long count = [[goodsDic valueForKey:@"goods_count"] longValue];
+                    int count = [[goodsDic valueForKey:@"goods_count"] intValue];
                     [goodsDic setValue:@(count + 1) forKey:@"goods_count"];
-                } else {
-                    NSMutableDictionary *newCartDic = [goodsModel mj_keyValues];
-                    [newCartDic setValue:@(1) forKey:@"goods_count"];
-                    [goodsArr addObject:newCartDic];
                 }
-                [HTPlistTool writeDataToPlist:self.path withArr:cartArray];
-                NSLog(@"%@",cartArray);
             }
+            if (!hasEqualGoods) {
+                NSMutableDictionary *newCartDic = [goodsModel mj_JSONObject];
+                [newCartDic setValue:@(1) forKey:@"goods_count"];
+                [goodsArr addObject:newCartDic];
+            }
+            hasEqualShop = YES;
+            [HTPlistTool writeDataToPlist:self.path withArr:cartArray];
+            NSLog(@"%@",cartArray);
         }
     }
-    if (!hasEqualGoods) {
-        NSMutableDictionary *newCartDic = [NSMutableDictionary dictionaryWithDictionary:@{@"shop_id":goodsModel.shop_id,@"shop_name":goodsModel.shop_name}];
-//        NSMutableArray *goodsArr =
-//        if ([[goodsDic valueForKey:@"goods_id"] isEqualToString:goodsModel.goods_id]) {
-//            [goodsDic setValue:@(1) forKey:@"goods_count"];
-//            [goodsArr addObject:goodsDic];
-//            [HTPlistTool writeDataToPlist:self.path withArr:cartArray];
-//            NSLog(@"%@",cartArray);
-//        }
+    if (!hasEqualShop) {
+        NSMutableArray *goodsArr = [NSMutableArray array];
+        NSMutableDictionary *newCartDic = [goodsModel mj_JSONObject];
+        [newCartDic setValue:@(1) forKey:@"goods_count"];
+        [goodsArr addObject:newCartDic];
+        NSMutableDictionary *shopDic = [NSMutableDictionary dictionaryWithDictionary:@{@"shop_id":goodsModel.shop_id,@"shop_name":goodsModel.shop_name,@"goods":goodsArr}];
+        [cartArray addObject:shopDic];
+        [HTPlistTool writeDataToPlist:self.path withArr:cartArray];
+        NSLog(@"%@",cartArray);
     }
     if ([self.delegate respondsToSelector:@selector(refreshCart)]) {
         [self.delegate refreshCart];

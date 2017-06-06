@@ -10,4 +10,12 @@
 
 @implementation HTCartModel
 
++ (NSDictionary *)objectClassInArray{
+    return @{@"goods" : [HTCartDetailModel class]};
+}
+
+@end
+
+@implementation HTCartDetailModel
+
 @end

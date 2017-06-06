@@ -20,7 +20,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.userInteractionEnabled = YES;
     
 }
 
