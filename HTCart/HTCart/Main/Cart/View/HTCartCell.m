@@ -10,17 +10,8 @@
 
 @implementation HTCartCell
 
-//- (instancetype)initWithFrame:(CGRect)frame {
-//    if (self = [super initWithFrame:frame]) {
-//        [self awakeFromNib];
-//    }
-//    return self;
-//}
-
-
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

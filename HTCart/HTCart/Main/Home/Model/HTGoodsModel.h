@@ -25,6 +25,12 @@
 /** 商品图片 */
 @property (nonatomic, copy) NSString *goods_image;
 
+/** 商品属性 */
+@property (nonatomic, copy) NSString *goods_property;
+
+/** 商品限购 */
+@property (nonatomic, copy) NSString *goods_limit;
+
 /** 原价 */
 @property (nonatomic, copy) NSNumber *original_price;
 

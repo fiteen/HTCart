@@ -9,8 +9,16 @@
 #import "UILabel+TextAttribute.h"
 
 @implementation UILabel (TextAttribute)
+/** 设置label带有删除线 */
+- (void)setLabelWithDelLine {
+    NSUInteger length = [self.text length];
+    NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:self.text];
+    [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
+    [attri addAttribute:NSStrikethroughColorAttributeName value:TEXT_GRAY_COLOR range:NSMakeRange(0, length)];
+    [self setAttributedText:attri];
+}
 
-/* 设置label指定位置的文字颜色 **/
+/** 设置label指定位置的文字颜色 */
 - (void)setLabelText:(NSString *)str Color:(UIColor *)color Range:(NSRange)range {
     if ([str isKindOfClass:[NSNull class]]) {
         str = @"";

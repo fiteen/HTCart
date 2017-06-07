@@ -115,18 +115,29 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HTCartCell *cell = [tableView dequeueReusableCellWithIdentifier:HTCartNormalCellId];
+    // 为商品信息赋值
     HTCartModel *cartModel = _cartArray[indexPath.section];
     cell.goodsImage.image = [UIImage imageNamed:cartModel.goods[indexPath.row].goods_image];
     cell.nameLabel.text = cartModel.goods[indexPath.row].goods_name;
+    cell.propertyLabel.text = cartModel.goods[indexPath.row].goods_property;
+    cell.limitLabel.text = cartModel.goods[indexPath.row].goods_limit;
+    cell.currentPriceLabel.text = [NSString stringWithFormat:@"¥%@",cartModel.goods[indexPath.row].current_price];
+    cell.originalPriceLabel.text = [NSString stringWithFormat:@"¥%@",cartModel.goods[indexPath.row].original_price];
     cell.countLabel.text = [NSString stringWithFormat:@"x%@",cartModel.goods[indexPath.row].goods_count];
+    
+    // 单选按钮设置
     cell.chooseButton.tag = indexPath.section * TAG_CELLBTN + indexPath.row;
     cell.chooseButton.selected = cartModel.goods[indexPath.row].chooseState;
     [cell.chooseButton addTarget:self action:@selector(clickSingleChooseButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // 为原价加删除线
+    [cell.originalPriceLabel setLabelWithDelLine];
+    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80;
+    return 90;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -146,11 +157,14 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 30;
+    return 40;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 10;
+    if (section != _cartArray.count - 1) {
+        return 10;
+    }
+    return 0;
 }
 
 #pragma mark - HTHomeViewControllerDelegate

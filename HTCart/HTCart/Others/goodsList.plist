@@ -13,6 +13,8 @@
 		<string>商品1</string>
 		<key>goods_image</key>
 		<string>goods1</string>
+		<key>goods_property</key>
+		<string>暗红色</string>
 		<key>original_price</key>
 		<integer>88</integer>
 		<key>current_price</key>
@@ -29,6 +31,10 @@
 		<string>商品2</string>
 		<key>goods_image</key>
 		<string>goods2</string>
+		<key>goods_property</key>
+		<string>均码</string>
+		<key>goods_limit</key>
+		<string>限购1件</string>
 		<key>original_price</key>
 		<integer>139</integer>
 		<key>current_price</key>
@@ -45,6 +51,8 @@
 		<string>商品3</string>
 		<key>goods_image</key>
 		<string>goods3</string>
+		<key>goods_property</key>
+		<string>通用款（不含锅盖和木铲）</string>
 		<key>original_price</key>
 		<integer>55</integer>
 		<key>current_price</key>
@@ -61,6 +69,10 @@
 		<string>商品4</string>
 		<key>goods_image</key>
 		<string>goods4</string>
+		<key>goods_property</key>
+		<string>500ml</string>
+		<key>goods_limit</key>
+		<string>限购5件</string>
 		<key>original_price</key>
 		<integer>168</integer>
 		<key>current_price</key>
