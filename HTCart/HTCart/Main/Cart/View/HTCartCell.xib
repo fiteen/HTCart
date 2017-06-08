@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -116,16 +117,103 @@
                 <outlet property="chooseButton" destination="usT-Fl-PyT" id="rPj-dZ-ULQ"/>
                 <outlet property="countLabel" destination="WXf-WN-VSa" id="G6A-Pz-IPL"/>
                 <outlet property="currentPriceLabel" destination="aBc-kK-qy5" id="TGv-Y1-cO1"/>
+                <outlet property="deleteButton" destination="bQZ-a6-urF" id="urD-8R-xQ4"/>
                 <outlet property="goodsImage" destination="wSQ-Zg-BIT" id="Uly-V9-L4I"/>
                 <outlet property="limitLabel" destination="Is0-YI-sA6" id="OVG-V4-b7n"/>
                 <outlet property="nameLabel" destination="vUY-Lf-oOT" id="o3f-iH-ga7"/>
                 <outlet property="originalPriceLabel" destination="xqK-Ox-uqx" id="kaK-KD-9pv"/>
-                <outlet property="propertyLabel" destination="4Kx-zr-sUw" id="yOm-cl-9Tf"/>
+                <outlet property="propertyLabel" destination="4Kx-zr-sUw" id="YYW-0d-FBO"/>
             </connections>
-            <point key="canvasLocation" x="26.5" y="-131"/>
+            <point key="canvasLocation" x="27" y="-283"/>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HTCartEditCell" rowHeight="100" id="oVx-mN-KWX" userLabel="HTCartCell" customClass="HTCartCell">
+            <rect key="frame" x="0.0" y="0.0" width="325" height="90"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oVx-mN-KWX" id="JJg-7L-BrS">
+                <rect key="frame" x="0.0" y="0.0" width="325" height="90"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iNq-mm-oid">
+                        <rect key="frame" x="10" y="35" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="0a9-uq-4OO"/>
+                            <constraint firstAttribute="height" constant="20" id="zC0-rG-UIf"/>
+                        </constraints>
+                        <state key="normal" image="icon_orderpay_normal"/>
+                        <state key="selected" image="icon_orderpay_selected"/>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y4U-qh-6Bl">
+                        <rect key="frame" x="40" y="5" width="80" height="79.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="x13-ml-avB"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQZ-a6-urF">
+                        <rect key="frame" x="275" y="0.0" width="50" height="90"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="c2n-bP-ZAn"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="删除">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow_icon" translatesAutoresizingMaskIntoConstraints="NO" id="pby-v1-KJP">
+                        <rect key="frame" x="249" y="63" width="16" height="9"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="9" id="7Xf-8q-JpX"/>
+                            <constraint firstAttribute="width" constant="16" id="cSE-5v-HjR"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cm1-hH-gOP">
+                        <rect key="frame" x="130" y="45" width="109" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="dkf-wy-WfP"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="0.61953866479999997" green="0.61964780090000005" blue="0.61953175069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QpB-dM-f5L">
+                        <rect key="frame" x="120" y="45" width="155" height="44.5"/>
+                        <state key="normal">
+                            <color key="titleColor" red="0.61953866479999997" green="0.61964780090000005" blue="0.61953175069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Cm1-hH-gOP" firstAttribute="leading" secondItem="Y4U-qh-6Bl" secondAttribute="trailing" constant="10" id="0sS-FV-eFz"/>
+                    <constraint firstItem="Y4U-qh-6Bl" firstAttribute="top" secondItem="JJg-7L-BrS" secondAttribute="top" constant="5" id="3AL-UV-15r"/>
+                    <constraint firstItem="bQZ-a6-urF" firstAttribute="top" secondItem="JJg-7L-BrS" secondAttribute="top" id="5Dw-z4-rXE"/>
+                    <constraint firstItem="iNq-mm-oid" firstAttribute="centerY" secondItem="JJg-7L-BrS" secondAttribute="centerY" id="CrG-V0-3lK"/>
+                    <constraint firstAttribute="trailing" secondItem="bQZ-a6-urF" secondAttribute="trailing" id="FSc-0M-fh5"/>
+                    <constraint firstItem="bQZ-a6-urF" firstAttribute="leading" secondItem="QpB-dM-f5L" secondAttribute="trailing" id="HqA-ai-kFe"/>
+                    <constraint firstItem="iNq-mm-oid" firstAttribute="leading" secondItem="JJg-7L-BrS" secondAttribute="leading" constant="10" id="JhO-cn-8Zv"/>
+                    <constraint firstAttribute="bottom" secondItem="QpB-dM-f5L" secondAttribute="bottom" id="M0a-ox-JrM"/>
+                    <constraint firstItem="QpB-dM-f5L" firstAttribute="leading" secondItem="Y4U-qh-6Bl" secondAttribute="trailing" id="Mhu-xi-eRZ"/>
+                    <constraint firstAttribute="bottom" secondItem="Y4U-qh-6Bl" secondAttribute="bottom" constant="5" id="Olu-H2-DT0"/>
+                    <constraint firstAttribute="bottom" secondItem="pby-v1-KJP" secondAttribute="bottom" constant="18" id="QWi-4Y-jcx"/>
+                    <constraint firstItem="bQZ-a6-urF" firstAttribute="leading" secondItem="pby-v1-KJP" secondAttribute="trailing" constant="10" id="RmG-MZ-vds"/>
+                    <constraint firstItem="QpB-dM-f5L" firstAttribute="height" secondItem="JJg-7L-BrS" secondAttribute="height" multiplier="0.5" id="Uya-sH-Pxl"/>
+                    <constraint firstItem="Y4U-qh-6Bl" firstAttribute="leading" secondItem="iNq-mm-oid" secondAttribute="trailing" constant="10" id="b63-ra-Dph"/>
+                    <constraint firstAttribute="bottom" secondItem="Cm1-hH-gOP" secondAttribute="bottom" id="fls-qy-O0I"/>
+                    <constraint firstAttribute="bottom" secondItem="bQZ-a6-urF" secondAttribute="bottom" id="qVD-Bl-eOQ"/>
+                    <constraint firstItem="pby-v1-KJP" firstAttribute="leading" secondItem="Cm1-hH-gOP" secondAttribute="trailing" constant="10" id="sfj-1n-sG3"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="chooseButton" destination="iNq-mm-oid" id="K9s-Ow-vY7"/>
+                <outlet property="deleteButton" destination="bQZ-a6-urF" id="TQN-fh-40w"/>
+                <outlet property="goodsImage" destination="Y4U-qh-6Bl" id="Pjl-mJ-bNY"/>
+                <outlet property="propertyEditButton" destination="QpB-dM-f5L" id="kQE-EW-WNJ"/>
+                <outlet property="propertyEditLabel" destination="Cm1-hH-gOP" id="1uj-U2-JMT"/>
+            </connections>
+            <point key="canvasLocation" x="27" y="-74"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="down_arrow_icon" width="18" height="10"/>
         <image name="icon_orderpay_normal" width="20" height="20"/>
         <image name="icon_orderpay_selected" width="20" height="20"/>
     </resources>

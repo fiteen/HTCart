@@ -37,6 +37,7 @@
 static const CGFloat bottomViewHeight = 50;
 
 static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
+static NSString * const HTCartEditCellId = @"HTCartEditCell";
 
 - (HTCartBottomView *)bottomView {
     if (!_bottomView) {
@@ -91,7 +92,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 - (void)initView {
     self.view.backgroundColor = BACKGROUND_GRAY_COLOR;
     self.navigationItem.title = @"购物车";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editGoods)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editAllGoods:)];
     self.bottomView.hidden = NO;
     
     [self refreshCart];
@@ -114,25 +115,31 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    HTCartCell *cell = [tableView dequeueReusableCellWithIdentifier:HTCartNormalCellId];
+    HTCartCell *cell = [HTCartCell new];
     // 为商品信息赋值
     HTCartModel *cartModel = _cartArray[indexPath.section];
+    if (cartModel.isEdit) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"HTCartCell" owner:self options:nil] objectAtIndex:1];
+        [_tableView registerNib:[UINib nibWithNibName:@"HTCartCell" bundle:nil] forCellReuseIdentifier:HTCartEditCellId];
+        cell.propertyEditLabel.text = cartModel.goods[indexPath.row].goods_property;
+        [cell.propertyEditButton addTarget:self action:@selector(editPropertyButton:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.deleteButton addTarget:self action:@selector(deleteGoods:) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"HTCartCell" owner:self options:nil] firstObject];
+        cell.nameLabel.text = cartModel.goods[indexPath.row].goods_name;
+        cell.propertyLabel.text = cartModel.goods[indexPath.row].goods_property;
+        cell.limitLabel.text = cartModel.goods[indexPath.row].goods_limit;
+        cell.currentPriceLabel.text = [NSString stringWithFormat:@"¥%@",cartModel.goods[indexPath.row].current_price];
+        cell.originalPriceLabel.text = [NSString stringWithFormat:@"¥%@",cartModel.goods[indexPath.row].original_price];
+        cell.countLabel.text = [NSString stringWithFormat:@"x%@",cartModel.goods[indexPath.row].goods_count];
+        // 为原价加删除线
+        [cell.originalPriceLabel setLabelWithDelLine];
+    }
     cell.goodsImage.image = [UIImage imageNamed:cartModel.goods[indexPath.row].goods_image];
-    cell.nameLabel.text = cartModel.goods[indexPath.row].goods_name;
-    cell.propertyLabel.text = cartModel.goods[indexPath.row].goods_property;
-    cell.limitLabel.text = cartModel.goods[indexPath.row].goods_limit;
-    cell.currentPriceLabel.text = [NSString stringWithFormat:@"¥%@",cartModel.goods[indexPath.row].current_price];
-    cell.originalPriceLabel.text = [NSString stringWithFormat:@"¥%@",cartModel.goods[indexPath.row].original_price];
-    cell.countLabel.text = [NSString stringWithFormat:@"x%@",cartModel.goods[indexPath.row].goods_count];
-    
     // 单选按钮设置
     cell.chooseButton.tag = indexPath.section * TAG_CELLBTN + indexPath.row;
     cell.chooseButton.selected = cartModel.goods[indexPath.row].chooseState;
     [cell.chooseButton addTarget:self action:@selector(clickSingleChooseButton:) forControlEvents:UIControlEventTouchUpInside];
-    
-    // 为原价加删除线
-    [cell.originalPriceLabel setLabelWithDelLine];
-    
     return cell;
 }
 
@@ -147,6 +154,15 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     view.chooseButton.tag = TAG_HEADERBTN + section;
     [view.chooseButton addTarget:self action:@selector(clickShopAllChooseButton:) forControlEvents:UIControlEventTouchUpInside];
     [view.shopButton setTitle:cartModel.shop_name forState:UIControlStateNormal];
+    [view.editButton setTitle:cartModel.isEdit ? @"完成" : @"编辑" forState:UIControlStateNormal];
+    view.editButton.tag = TAG_HEADERBTN + section;
+    [view.editButton addTarget:self action:@selector(editShopGoods:) forControlEvents:UIControlEventTouchUpInside];
+    // 若全选商品,编辑按钮隐藏
+    BOOL isAllEdit = YES;
+    for (HTCartModel *cartModel in _cartArray) {
+        isAllEdit *= cartModel.isEdit;
+    }
+    view.editButton.hidden = isAllEdit;
     return view;
 }
 
@@ -188,8 +204,29 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 
 #pragma mark - SEL
 
-- (void)editGoods {
-    
+// 编辑商品属性
+- (void)editPropertyButton:(UIButton *)button {
+    NSLog(@"编辑属性");
+}
+
+// 编辑所有商品
+- (void)editAllGoods:(UIBarButtonItem *)item {
+    item.title = [item.title isEqualToString:@"编辑"] ? @"完成" : @"编辑";
+    for (HTCartModel *cartModel in _cartArray) {
+        cartModel.isEdit = [item.title isEqualToString:@"编辑"] ? NO : YES;
+    }
+    [_tableView reloadData];
+}
+
+- (void)deleteGoods:(UIButton *)button {
+    NSLog(@"删除商品");
+}
+
+// 编辑商铺内的商品
+- (void)editShopGoods:(UIButton *)button {
+    HTCartModel *cartModel = _cartArray[button.tag - TAG_HEADERBTN];
+    cartModel.isEdit = !cartModel.isEdit;
+    [_tableView reloadData];
 }
 
 // 单选商品

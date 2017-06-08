@@ -26,7 +26,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *originalPriceLabel;
 /** 商品数量 */
 @property (weak, nonatomic) IBOutlet UILabel *countLabel;
+/** 修改按钮标签 */
+@property (weak, nonatomic) IBOutlet UILabel *propertyEditLabel;
+/** 修改属性按钮 */
+@property (weak, nonatomic) IBOutlet UIButton *propertyEditButton;
 /** 删除按钮 */
-//@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 @end

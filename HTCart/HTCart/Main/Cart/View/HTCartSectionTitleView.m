@@ -35,7 +35,7 @@
     [self addSubview:_shopButton];
     
     _editButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 40, 0, 30, 40)];
-    [_editButton setTitle:@"编辑" forState:UIControlStateNormal];
+//    [_editButton setTitle:@"编辑" forState:UIControlStateNormal];
     [_editButton setTitleColor:TEXT_BLACK_COLOR forState:UIControlStateNormal];
     _editButton.titleLabel.font = [UIFont systemFontOfSize:12];
     [self addSubview:_editButton];

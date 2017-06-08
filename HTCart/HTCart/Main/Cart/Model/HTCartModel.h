@@ -24,6 +24,8 @@
 /** 是否选择 */
 @property (nonatomic, assign) BOOL chooseState;
 
+/** 是否编辑状态 */
+@property (nonatomic, assign) BOOL isEdit;
 
 @end
 
