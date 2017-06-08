@@ -12,8 +12,10 @@
 
 /** 全选按钮 */
 @property (nonatomic, strong) UIButton *allChooseButton;
+
 /** 合计金额 */
 @property (nonatomic, strong) UILabel *totalLabel;
+
 /** 结算按钮 */
 @property (nonatomic, strong) UIButton *settleButton;
 

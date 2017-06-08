@@ -11,7 +11,9 @@
 #import "HTCartModel.h"
 #import "HTCartSectionTitleView.h"
 #import "HTCartCell.h"
+#import "HTNumberButton.h"
 #import "HTCartBottomView.h"
+
 #define TAG_CELLBTN 0x1000
 #define TAG_HEADERBTN 0x0100
 
@@ -37,7 +39,6 @@
 static const CGFloat bottomViewHeight = 50;
 
 static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
-static NSString * const HTCartEditCellId = @"HTCartEditCell";
 
 - (HTCartBottomView *)bottomView {
     if (!_bottomView) {
@@ -120,7 +121,10 @@ static NSString * const HTCartEditCellId = @"HTCartEditCell";
     HTCartModel *cartModel = _cartArray[indexPath.section];
     if (cartModel.isEdit) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"HTCartCell" owner:self options:nil] objectAtIndex:1];
-        [_tableView registerNib:[UINib nibWithNibName:@"HTCartCell" bundle:nil] forCellReuseIdentifier:HTCartEditCellId];
+        cell.countView.currentNumber = [cartModel.goods[indexPath.row].goods_count integerValue];
+        cell.countView.resultBlock = ^(NSInteger number, BOOL isAdd) {
+            
+        };
         cell.propertyEditLabel.text = cartModel.goods[indexPath.row].goods_property;
         [cell.propertyEditButton addTarget:self action:@selector(editPropertyButton:) forControlEvents:UIControlEventTouchUpInside];
         [cell.deleteButton addTarget:self action:@selector(deleteGoods:) forControlEvents:UIControlEventTouchUpInside];
