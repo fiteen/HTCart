@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "HTNumberButton.h"
 
+@protocol HTCartCellDelegate <NSObject>
+
+-(void)ChangeGoodsNumberCell:(UITableViewCell *)cell Number:(NSInteger)num;
+
+@end
+
 @interface HTCartCell : UITableViewCell
 
 /** 选择按钮 */
@@ -46,6 +52,9 @@
 
 /** 删除按钮 */
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+
+/** 代理 */
+@property (nonatomic, weak)id<HTCartCellDelegate> delegate;
 
 
 @end

@@ -34,7 +34,7 @@
 		<key>goods_property</key>
 		<string>均码</string>
 		<key>goods_limit</key>
-		<string>限购1件</string>
+		<string>1</string>
 		<key>original_price</key>
 		<integer>139</integer>
 		<key>current_price</key>
@@ -72,7 +72,7 @@
 		<key>goods_property</key>
 		<string>500ml</string>
 		<key>goods_limit</key>
-		<string>限购5件</string>
+		<string>5</string>
 		<key>original_price</key>
 		<integer>168</integer>
 		<key>current_price</key>

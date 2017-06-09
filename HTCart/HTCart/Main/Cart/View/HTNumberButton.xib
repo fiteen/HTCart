@@ -35,6 +35,10 @@
                             <state key="normal" title="-">
                                 <color key="titleColor" red="0.61953866479999997" green="0.61964780090000005" blue="0.61953175069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <action selector="subtractTouchDown:" destination="-1" eventType="touchDown" id="bZW-QP-ny2"/>
+                                <action selector="touchUp:" destination="-1" eventType="touchUpInside" id="R2B-4z-uGD"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4lT-TT-2hN">
                             <rect key="frame" x="155" y="0.0" width="45" height="45"/>
@@ -46,12 +50,16 @@
                             <state key="normal" title="+">
                                 <color key="titleColor" red="0.61953866479999997" green="0.61964780090000005" blue="0.61953175069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <action selector="addTouchDown:" destination="-1" eventType="touchDown" id="9Qa-pe-ugB"/>
+                                <action selector="touchUp:" destination="-1" eventType="touchUpInside" id="CeX-N3-I4Q"/>
+                            </connections>
                         </button>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bwv-uc-Y3o">
                             <rect key="frame" x="45" y="0.0" width="110" height="45"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

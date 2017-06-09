@@ -17,7 +17,7 @@
 #define TAG_CELLBTN 0x1000
 #define TAG_HEADERBTN 0x0100
 
-@interface HTCartViewController ()<UITableViewDelegate,UITableViewDataSource,HTHomeViewControllerDelegate> {
+@interface HTCartViewController ()<UITableViewDelegate,UITableViewDataSource,HTHomeViewControllerDelegate,HTCartCellDelegate> {
     /** 购物车清单 */
     NSMutableArray *_cartArray;
     /** 选择总价 */
@@ -121,18 +121,18 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     HTCartModel *cartModel = _cartArray[indexPath.section];
     if (cartModel.isEdit) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"HTCartCell" owner:self options:nil] objectAtIndex:1];
+        cell.delegate = self;
         cell.countView.currentNumber = [cartModel.goods[indexPath.row].goods_count integerValue];
-        cell.countView.resultBlock = ^(NSInteger number, BOOL isAdd) {
-            
-        };
+        cell.countView.maxValue = cartModel.goods[indexPath.row].goods_limit ==  nil ? LONG_MAX : [cartModel.goods[indexPath.row].goods_limit integerValue];
         cell.propertyEditLabel.text = cartModel.goods[indexPath.row].goods_property;
         [cell.propertyEditButton addTarget:self action:@selector(editPropertyButton:) forControlEvents:UIControlEventTouchUpInside];
+        cell.deleteButton.tag = indexPath.section * TAG_CELLBTN + indexPath.row;
         [cell.deleteButton addTarget:self action:@selector(deleteGoods:) forControlEvents:UIControlEventTouchUpInside];
     } else {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"HTCartCell" owner:self options:nil] firstObject];
         cell.nameLabel.text = cartModel.goods[indexPath.row].goods_name;
         cell.propertyLabel.text = cartModel.goods[indexPath.row].goods_property;
-        cell.limitLabel.text = cartModel.goods[indexPath.row].goods_limit;
+        cell.limitLabel.text = cartModel.goods[indexPath.row].goods_limit == nil? @"" : [NSString stringWithFormat:@"限购%@件",cartModel.goods[indexPath.row].goods_limit];
         cell.currentPriceLabel.text = [NSString stringWithFormat:@"¥%@",cartModel.goods[indexPath.row].current_price];
         cell.originalPriceLabel.text = [NSString stringWithFormat:@"¥%@",cartModel.goods[indexPath.row].original_price];
         cell.countLabel.text = [NSString stringWithFormat:@"x%@",cartModel.goods[indexPath.row].goods_count];
@@ -223,7 +223,20 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 - (void)deleteGoods:(UIButton *)button {
-    NSLog(@"删除商品");
+    NSInteger section = button.tag / TAG_CELLBTN;
+    NSInteger row = button.tag % TAG_CELLBTN;
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    HTCartModel *cartModel = _cartArray[section];
+    if (cartModel.goods.count > 1) {
+        NSMutableArray *cartMutableArr = [cartModel.goods mutableCopy];
+        [cartMutableArr removeObjectAtIndex:row];
+        cartModel.goods = cartMutableArr;
+     } else {
+        [_cartArray removeObjectAtIndex:section];
+    }
+    [_tableView reloadData];
+//    [_tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationAutomatic];
+
 }
 
 // 编辑商铺内的商品
@@ -294,6 +307,16 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     }
     self.bottomView.totalLabel.text = [NSString stringWithFormat:@"合计：¥%.2f",_totalPrice];
     [self.bottomView.totalLabel setLabelText:self.bottomView.totalLabel.text Color:TEXT_BLACK_COLOR Range:NSMakeRange(0, 3)];
+}
+
+/**
+ *  修改商品数量
+ */
+-(void)ChangeGoodsNumberCell:(UITableViewCell *)cell Number:(NSInteger)num {
+    NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
+    HTCartModel *cartModel = _cartArray[indexPath.section];
+    cartModel.goods[indexPath.row].goods_count = [NSNumber numberWithInteger:num];
+//    [_cartArray writeToFile:_path atomically:YES];
 }
 
 - (void)didReceiveMemoryWarning {

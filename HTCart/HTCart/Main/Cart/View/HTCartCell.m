@@ -12,6 +12,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    _countView.resultBlock = ^(NSInteger number, BOOL isAdd) {
+        [self.delegate ChangeGoodsNumberCell:self Number:number];
+    };
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

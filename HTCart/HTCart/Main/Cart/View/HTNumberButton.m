@@ -25,7 +25,7 @@
 /** 数字显示/输入框 */
 @property (weak, nonatomic) IBOutlet UITextField *numberTextField;
 
-/** 快速加减定时器*/
+/** 快速加减定时器 */
 @property (nonatomic, strong) NSTimer *timer;
 
 @end
@@ -34,7 +34,12 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
+        // 界面布局
         [self awakeFromNib];
+        // 设置最小值
+        _minValue = 1;
+        // 设置是否支持键盘输入
+        _supportKeyboard = YES;
     }
     return self;
 }
@@ -44,6 +49,63 @@
     [[NSBundle mainBundle] loadNibNamed:@"HTNumberButton" owner:self options:nil];
     self.view.frame = self.bounds;
     [self addSubview:self.view];
+    [self addCompleteButtonOnKeyboard];
+}
+
+/**
+ *  在键盘上方的Toolbar上添加完成按钮
+ */
+- (void)addCompleteButtonOnKeyboard {
+    UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
+    [keyboardDoneButtonView sizeToFit];
+    // toolbar上的2个按钮
+    UIBarButtonItem *SpaceButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                               target:nil  action:nil];
+    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"完成"
+                                                                   style:UIBarButtonItemStylePlain target:self
+                                                                  action:@selector(pickerDoneClicked)];
+    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:SpaceButton, doneButton, nil]];
+    _numberTextField.inputAccessoryView = keyboardDoneButtonView;
+}
+
+-(void)pickerDoneClicked {
+    [_numberTextField resignFirstResponder];
+    [self checkNumberWhenUpdate];
+}
+
+- (void)didMoveToWindow {
+    if (self.window) {
+        // 注册键盘弹起和收回的通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    }
+}
+
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+    if (newWindow == nil) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
+}
+
+- (void)keyboardWillShow:(NSNotification *)aNotification {
+    CGRect keyboardRect = [[[aNotification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    for (UIView* next = [self superview]; next; next = next.superview) {
+        UIResponder* nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UITableView class]]) {
+            UITableView *tableView = (UITableView *)nextResponder;
+            tableView.frame = CGRectMake(0, NAVIGATIONBAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT - keyboardRect.size.height);
+        }
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)aNotification {
+    for (UIView* next = [self superview]; next; next = next.superview) {
+        UIResponder* nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UITableView class]]) {
+            UITableView *tableView = (UITableView *)nextResponder;
+            tableView.frame = CGRectMake(0, NAVIGATIONBAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT);
+        }
+    }
 }
 
 #pragma mark - 输入框中的内容设置
@@ -53,8 +115,16 @@
 
 - (void)setCurrentNumber:(NSInteger)currentNumber {
     _numberTextField.text = [NSString stringWithFormat:@"%ld",currentNumber];
-//    [self checkNumberWhenUpdate];
+    [self checkNumberWhenUpdate];
 }
+
+#pragma mark - 最大值设置
+- (void)setMaxValue:(NSInteger)maxValue {
+    _maxValue = maxValue;
+    [self checkNumberWhenUpdate];
+}
+
+#pragma mark - IBAction
 
 /**
  *  点击: 单击逐次减少,长按连续快速减少
@@ -77,25 +147,22 @@
 /**
  *  手指松开
  */
-- (IBAction)TouchUp:(id)sender {
+- (IBAction)touchUp:(id)sender {
     [self invalidateTimer];
 }
+
+#pragma mark - SEL
 
 /**
  *  减运算
  */
 - (void)subtractAction {
     [self checkNumberWhenUpdate];
-    
     NSInteger number = [_numberTextField.text integerValue] - 1;
-    
     if (number >= _minValue) {
         _numberTextField.text = [NSString stringWithFormat:@"%ld", number];
         [self buttonClickCallBackWithAddAction:NO];
     } else {
-       if (_shakeAnimation) {
-           [self shakeAnimationMethod];
-       }
         HTLog(@"数量不能小于%ld",_minValue);
     }
 }
@@ -105,18 +172,11 @@
  */
 - (void)addAction {
     [self checkNumberWhenUpdate];
-    
     NSInteger number = _numberTextField.text.integerValue + 1;
-    
     if (number <= _maxValue) {
         _numberTextField.text = [NSString stringWithFormat:@"%ld", number];
-        
         [self buttonClickCallBackWithAddAction:YES];
-    }
-    else {
-        if (_shakeAnimation) {
-            [self shakeAnimationMethod];
-        }
+    } else {
         HTLog(@"已超过最大数量%ld",_maxValue);
     }
 }
@@ -151,20 +211,6 @@
         _numberTextField.text = minValueString;
     }
     _numberTextField.text.integerValue > _maxValue ? _numberTextField.text = maxValueString : nil;
-}
-
-#pragma mark - 核心动画
-/**
- *  抖动动画
- */
-- (void)shakeAnimationMethod {
-    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"position.x"];
-    CGFloat positionX = self.layer.position.x;
-    animation.values = @[@(positionX-10),@(positionX),@(positionX+10)];
-    animation.repeatCount = 3;
-    animation.duration = 0.07;
-    animation.autoreverses = YES;
-    [self.layer addAnimation:animation forKey:nil];
 }
 
 @end

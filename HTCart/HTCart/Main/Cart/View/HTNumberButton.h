@@ -43,9 +43,6 @@ IB_DESIGNABLE
 /** 是否可以使用键盘输入,默认YES*/
 @property (nonatomic, assign, getter=isSupportKeyboard) IBInspectable BOOL supportKeyboard;
 
-/** 是否开启抖动动画,默认NO*/
-@property (nonatomic, assign) IBInspectable BOOL shakeAnimation;
-
 /** 输入框中的内容 */
 @property (nonatomic, assign) NSInteger currentNumber;
 
