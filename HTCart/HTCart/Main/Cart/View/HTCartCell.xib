@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="325" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="325" height="90"/>
+                <rect key="frame" x="0.0" y="0.0" width="325" height="89"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="usT-Fl-PyT">
@@ -113,6 +113,7 @@
                     <constraint firstItem="vUY-Lf-oOT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="x8C-pE-J6p"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="chooseButton" destination="usT-Fl-PyT" id="rPj-dZ-ULQ"/>
                 <outlet property="countLabel" destination="WXf-WN-VSa" id="G6A-Pz-IPL"/>
@@ -131,7 +132,7 @@
             <rect key="frame" x="0.0" y="0.0" width="325" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oVx-mN-KWX" id="JJg-7L-BrS">
-                <rect key="frame" x="0.0" y="0.0" width="325" height="90"/>
+                <rect key="frame" x="0.0" y="0.0" width="325" height="89"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iNq-mm-oid">
@@ -144,13 +145,13 @@
                         <state key="selected" image="icon_orderpay_selected"/>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y4U-qh-6Bl">
-                        <rect key="frame" x="40" y="5" width="80" height="79.5"/>
+                        <rect key="frame" x="40" y="5" width="80" height="79"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="x13-ml-avB"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQZ-a6-urF">
-                        <rect key="frame" x="275" y="0.0" width="50" height="90"/>
+                        <rect key="frame" x="275" y="0.0" width="50" height="89"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="c2n-bP-ZAn"/>
@@ -161,14 +162,14 @@
                         </state>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow_icon" translatesAutoresizingMaskIntoConstraints="NO" id="pby-v1-KJP">
-                        <rect key="frame" x="249" y="63" width="16" height="9"/>
+                        <rect key="frame" x="249" y="62" width="16" height="9"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="9" id="7Xf-8q-JpX"/>
                             <constraint firstAttribute="width" constant="16" id="cSE-5v-HjR"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cm1-hH-gOP">
-                        <rect key="frame" x="130" y="45" width="109" height="45"/>
+                        <rect key="frame" x="130" y="44" width="109" height="45"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="45" id="dkf-wy-WfP"/>
                         </constraints>
@@ -177,13 +178,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QpB-dM-f5L">
-                        <rect key="frame" x="120" y="45" width="155" height="44.5"/>
+                        <rect key="frame" x="120" y="44" width="155" height="45"/>
                         <state key="normal">
                             <color key="titleColor" red="0.61953866479999997" green="0.61964780090000005" blue="0.61953175069999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VSg-bf-oVs" customClass="HTNumberButton">
-                        <rect key="frame" x="120" y="0.0" width="155" height="45"/>
+                        <rect key="frame" x="120" y="0.0" width="155" height="44"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
@@ -211,6 +212,7 @@
                     <constraint firstItem="pby-v1-KJP" firstAttribute="leading" secondItem="Cm1-hH-gOP" secondAttribute="trailing" constant="10" id="sfj-1n-sG3"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="chooseButton" destination="iNq-mm-oid" id="K9s-Ow-vY7"/>
                 <outlet property="countView" destination="VSg-bf-oVs" id="fTP-6i-d2D"/>

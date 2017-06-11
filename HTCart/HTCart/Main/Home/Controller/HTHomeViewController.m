@@ -116,7 +116,12 @@ static const CGFloat kLinePadding = 10;         // 不同行之间的间距
                 if ([[goodsDic valueForKey:@"goods_id"] isEqualToString:goodsModel.goods_id]) {
                     hasEqualGoods = YES;
                     int count = [[goodsDic valueForKey:@"goods_count"] intValue];
-                    [goodsDic setValue:@(count + 1) forKey:@"goods_count"];
+                    // 如果不超过限购 数量+1
+                    if (count < [goodsModel.goods_limit integerValue]) {
+                        [goodsDic setValue:@(count + 1) forKey:@"goods_count"];
+                    } else {
+                        NSLog(@"超过限购");
+                    }
                 }
             }
             if (!hasEqualGoods) {
@@ -125,8 +130,7 @@ static const CGFloat kLinePadding = 10;         // 不同行之间的间距
                 [goodsArr addObject:newCartDic];
             }
             hasEqualShop = YES;
-            [HTPlistTool writeDataToPlist:self.path withArr:cartArray];
-            NSLog(@"%@",cartArray);
+            [cartArray writeToFile:self.path atomically:YES];
         }
     }
     if (!hasEqualShop) {
@@ -136,8 +140,7 @@ static const CGFloat kLinePadding = 10;         // 不同行之间的间距
         [goodsArr addObject:newCartDic];
         NSMutableDictionary *shopDic = [NSMutableDictionary dictionaryWithDictionary:@{@"shop_id":goodsModel.shop_id,@"shop_name":goodsModel.shop_name,@"goods":goodsArr}];
         [cartArray addObject:shopDic];
-        [HTPlistTool writeDataToPlist:self.path withArr:cartArray];
-        NSLog(@"%@",cartArray);
+        [cartArray writeToFile:self.path atomically:YES];
     }
     if ([self.delegate respondsToSelector:@selector(refreshCart)]) {
         [self.delegate refreshCart];

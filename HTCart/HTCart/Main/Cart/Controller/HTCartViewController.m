@@ -122,8 +122,8 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     if (cartModel.isEdit) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"HTCartCell" owner:self options:nil] objectAtIndex:1];
         cell.delegate = self;
-        cell.countView.currentNumber = [cartModel.goods[indexPath.row].goods_count integerValue];
         cell.countView.maxValue = cartModel.goods[indexPath.row].goods_limit ==  nil ? LONG_MAX : [cartModel.goods[indexPath.row].goods_limit integerValue];
+        cell.countView.currentNumber = [cartModel.goods[indexPath.row].goods_count integerValue];
         cell.propertyEditLabel.text = cartModel.goods[indexPath.row].goods_property;
         [cell.propertyEditButton addTarget:self action:@selector(editPropertyButton:) forControlEvents:UIControlEventTouchUpInside];
         cell.deleteButton.tag = indexPath.section * TAG_CELLBTN + indexPath.row;
@@ -187,6 +187,36 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     return 0;
 }
 
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"    " handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"确认要删除这个宝贝吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [alertC addAction:cancelAction];
+        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            HTCartModel *cartModel = _cartArray[indexPath.section];
+            if (cartModel.goods.count > 1) {
+                NSMutableArray *cartMutableArr = [cartModel.goods mutableCopy];
+                [cartMutableArr removeObjectAtIndex:indexPath.row];
+                cartModel.goods = cartMutableArr;
+            } else {
+                [_cartArray removeObjectAtIndex:indexPath.section];
+            }
+            NSMutableArray *newCartArr = [NSMutableArray array];
+            for (HTCartModel *cartModel in _cartArray) {
+                [newCartArr addObject:[cartModel mj_JSONObject]];
+            }
+            [newCartArr writeToFile:_path atomically:YES];
+            [_tableView reloadData];
+        }];
+        [alertC addAction:sureAction];
+        [self.navigationController presentViewController:alertC animated:YES completion:nil];
+    }];
+    UITableViewRowAction *similarRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"    " handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        NSLog(@"找相似");
+    }];
+    return @[deleteRowAction,similarRowAction];
+}
+
 #pragma mark - HTHomeViewControllerDelegate
 - (void)refreshCart {
     NSArray *plistArray = [[HTPlistTool readPlistArrayWithPath:self.path] mj_JSONObject];
@@ -223,20 +253,29 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 - (void)deleteGoods:(UIButton *)button {
-    NSInteger section = button.tag / TAG_CELLBTN;
-    NSInteger row = button.tag % TAG_CELLBTN;
-//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
-    HTCartModel *cartModel = _cartArray[section];
-    if (cartModel.goods.count > 1) {
-        NSMutableArray *cartMutableArr = [cartModel.goods mutableCopy];
-        [cartMutableArr removeObjectAtIndex:row];
-        cartModel.goods = cartMutableArr;
-     } else {
-        [_cartArray removeObjectAtIndex:section];
-    }
-    [_tableView reloadData];
-//    [_tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationAutomatic];
-
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"确认要删除这个宝贝吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alertC addAction:cancelAction];
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSInteger section = button.tag / TAG_CELLBTN;
+        NSInteger row = button.tag % TAG_CELLBTN;
+        HTCartModel *cartModel = _cartArray[section];
+        if (cartModel.goods.count > 1) {
+            NSMutableArray *cartMutableArr = [cartModel.goods mutableCopy];
+            [cartMutableArr removeObjectAtIndex:row];
+            cartModel.goods = cartMutableArr;
+        } else {
+            [_cartArray removeObjectAtIndex:section];
+        }
+        NSMutableArray *newCartArr = [NSMutableArray array];
+        for (HTCartModel *cartModel in _cartArray) {
+            [newCartArr addObject:[cartModel mj_JSONObject]];
+        }
+        [newCartArr writeToFile:_path atomically:YES];
+        [_tableView reloadData];
+    }];
+    [alertC addAction:sureAction];
+    [self.navigationController presentViewController:alertC animated:YES completion:nil];
 }
 
 // 编辑商铺内的商品
@@ -316,7 +355,14 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
     HTCartModel *cartModel = _cartArray[indexPath.section];
     cartModel.goods[indexPath.row].goods_count = [NSNumber numberWithInteger:num];
-//    [_cartArray writeToFile:_path atomically:YES];
+    // 存储数据
+    NSMutableArray *newCartArr = [NSMutableArray array];
+    for (HTCartModel *cartModel in _cartArray) {
+        NSArray *cartDic = [cartModel mj_JSONObject];
+        [cartDic setValue:@NO forKey:@"isEdit"];
+        [newCartArr addObject:cartDic];
+    }
+    [newCartArr writeToFile:_path atomically:YES];
 }
 
 - (void)didReceiveMemoryWarning {

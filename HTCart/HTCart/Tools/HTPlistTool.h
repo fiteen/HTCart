@@ -10,9 +10,6 @@
 
 @interface HTPlistTool : NSObject
 
-/* 向plist中写入数组数据 **/
-+ (void)writeDataToPlist:(NSString *)path withArr:(NSMutableArray *)array;
-
 /* 读取数组类型的plist **/
 + (NSMutableArray *)readPlistArrayWithPath:(NSString *)path;
 
