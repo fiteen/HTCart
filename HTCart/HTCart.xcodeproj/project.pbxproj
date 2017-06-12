@@ -27,6 +27,8 @@
 		2569CF141EDEC43F0091B2A9 /* HTCartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2569CF131EDEC43F0091B2A9 /* HTCartModel.m */; };
 		2575F8271EE4F6B700C84A6D /* HTGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2575F8261EE4F6B700C84A6D /* HTGoodsModel.m */; };
 		2575F82A1EE5507C00C84A6D /* HTCartSectionTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2575F8291EE5507C00C84A6D /* HTCartSectionTitleView.m */; };
+		2587DF141EEE2CCF00E5B043 /* MBProgressHUD+HT.m in Sources */ = {isa = PBXBuildFile; fileRef = 2587DF131EEE2CCF00E5B043 /* MBProgressHUD+HT.m */; };
+		2587DF161EEE2E2000E5B043 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2587DF151EEE2E2000E5B043 /* MBProgressHUD.bundle */; };
 		259C9E5E1EE0F82300C7537F /* UITableView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 259C9E5D1EE0F82300C7537F /* UITableView+Placeholder.m */; };
 		259C9E621EE115BD00C7537F /* HTPlistTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 259C9E611EE115BD00C7537F /* HTPlistTool.m */; };
 		77B2066A2D99DA730A3F8054 /* libPods-HTCart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A70EDA6F3143A4C9C75A91 /* libPods-HTCart.a */; };
@@ -70,6 +72,9 @@
 		2575F8261EE4F6B700C84A6D /* HTGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTGoodsModel.m; sourceTree = "<group>"; };
 		2575F8281EE5507C00C84A6D /* HTCartSectionTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCartSectionTitleView.h; sourceTree = "<group>"; };
 		2575F8291EE5507C00C84A6D /* HTCartSectionTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCartSectionTitleView.m; sourceTree = "<group>"; };
+		2587DF121EEE2CCF00E5B043 /* MBProgressHUD+HT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+HT.h"; sourceTree = "<group>"; };
+		2587DF131EEE2CCF00E5B043 /* MBProgressHUD+HT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+HT.m"; sourceTree = "<group>"; };
+		2587DF151EEE2E2000E5B043 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		259C9E5C1EE0F82300C7537F /* UITableView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Placeholder.h"; sourceTree = "<group>"; };
 		259C9E5D1EE0F82300C7537F /* UITableView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Placeholder.m"; sourceTree = "<group>"; };
 		259C9E601EE115BD00C7537F /* HTPlistTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTPlistTool.h; sourceTree = "<group>"; };
@@ -156,6 +161,8 @@
 				2569CF051EDEA2D20091B2A9 /* UILabel+TextAttribute.m */,
 				259C9E5C1EE0F82300C7537F /* UITableView+Placeholder.h */,
 				259C9E5D1EE0F82300C7537F /* UITableView+Placeholder.m */,
+				2587DF121EEE2CCF00E5B043 /* MBProgressHUD+HT.h */,
+				2587DF131EEE2CCF00E5B043 /* MBProgressHUD+HT.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -163,6 +170,7 @@
 		252F67C71ED95A2500E5E5C8 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				2587DF151EEE2E2000E5B043 /* MBProgressHUD.bundle */,
 				252F67AD1ED94D7A00E5E5C8 /* AppDelegate.h */,
 				252F67AE1ED94D7A00E5E5C8 /* AppDelegate.m */,
 				252F67B31ED94D7A00E5E5C8 /* Main.storyboard */,
@@ -351,6 +359,7 @@
 				252F67B71ED94D7A00E5E5C8 /* Assets.xcassets in Resources */,
 				252F67B51ED94D7A00E5E5C8 /* Main.storyboard in Resources */,
 				2569CF101EDEC2400091B2A9 /* goodsList.plist in Resources */,
+				2587DF161EEE2E2000E5B043 /* MBProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +426,7 @@
 				2569CF141EDEC43F0091B2A9 /* HTCartModel.m in Sources */,
 				2569CF031EDE9D6D0091B2A9 /* HTCartBottomView.m in Sources */,
 				252F67D11ED96A2E00E5E5C8 /* HTCartViewController.m in Sources */,
+				2587DF141EEE2CCF00E5B043 /* MBProgressHUD+HT.m in Sources */,
 				252F67C41ED9571700E5E5C8 /* HTTabBarViewController.m in Sources */,
 				252F67CD1ED95DE600E5E5C8 /* UIButton+ImageTitleSpacing.m in Sources */,
 				2575F8271EE4F6B700C84A6D /* HTGoodsModel.m in Sources */,

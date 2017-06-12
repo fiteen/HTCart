@@ -238,12 +238,16 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 
 #pragma mark - SEL
 
-// 编辑商品属性
+/**
+ *  编辑商品属性
+ */
 - (void)editPropertyButton:(UIButton *)button {
     NSLog(@"编辑属性");
 }
 
-// 编辑所有商品
+/**
+ *  编辑所有商品
+ */
 - (void)editAllGoods:(UIBarButtonItem *)item {
     item.title = [item.title isEqualToString:@"编辑"] ? @"完成" : @"编辑";
     for (HTCartModel *cartModel in _cartArray) {
@@ -252,6 +256,9 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     [_tableView reloadData];
 }
 
+/**
+ *  删除商品
+ */
 - (void)deleteGoods:(UIButton *)button {
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"确认要删除这个宝贝吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
@@ -278,14 +285,18 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     [self.navigationController presentViewController:alertC animated:YES completion:nil];
 }
 
-// 编辑商铺内的商品
+/**
+ *  编辑商铺内的商品
+ */
 - (void)editShopGoods:(UIButton *)button {
     HTCartModel *cartModel = _cartArray[button.tag - TAG_HEADERBTN];
     cartModel.isEdit = !cartModel.isEdit;
     [_tableView reloadData];
 }
 
-// 单选商品
+/**
+ *  单选商品
+ */
 - (void)clickSingleChooseButton:(UIButton *)button {
     button.selected = !button.selected;
     HTCartModel *cartModel = _cartArray[button.tag / TAG_CELLBTN];
@@ -305,7 +316,9 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     [self updateBottomView];
 }
 
-// 全选某商铺所有商品
+/**
+ *  全选某商铺所有商品
+ */
 - (void)clickShopAllChooseButton:(UIButton *)button {
     button.selected = !button.selected;
     HTCartModel *cartModel = _cartArray[button.tag - TAG_HEADERBTN];
@@ -317,7 +330,9 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     [self updateBottomView];
 }
 
-// 全选商品
+/**
+ *  全选商品
+ */
 - (void)clickAllChooseButton:(UIButton *)button {
     button.selected = !button.selected;
     for (HTCartModel *cartModel in _cartArray) {
@@ -330,11 +345,16 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     [self updateBottomView];
 }
 
+/**
+ *  结算
+ */
 - (void)clickSettleButton:(UIButton *)button {
     NSLog(@"结算");
 }
 
-// 修改底部信息
+/**
+ *  修改底部信息
+ */
 - (void)updateBottomView {
     _totalPrice = 0;
     for (HTCartModel *cartModel in _cartArray) {

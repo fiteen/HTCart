@@ -163,7 +163,7 @@
         _numberTextField.text = [NSString stringWithFormat:@"%ld", number];
         [self buttonClickCallBackWithAddAction:NO];
     } else {
-        HTLog(@"数量不能小于%ld",_minValue);
+        [MBProgressHUD showHint:@"受不了了，宝贝不能再减少了哦"];
     }
 }
 
@@ -177,7 +177,7 @@
         _numberTextField.text = [NSString stringWithFormat:@"%ld", number];
         [self buttonClickCallBackWithAddAction:YES];
     } else {
-        HTLog(@"已超过最大数量%ld",_maxValue);
+        [MBProgressHUD showHint:@"亲，该宝贝不能购买更多哦"];
     }
 }
 

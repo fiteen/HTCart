@@ -10,15 +10,15 @@
 		<key>shop_name</key>
 		<string>商品1旗舰店</string>
 		<key>goods_name</key>
-		<string>商品1</string>
+		<string>麦饭石不粘锅炒锅 无油烟燃气电磁炉通用平底锅</string>
 		<key>goods_image</key>
 		<string>goods1</string>
 		<key>goods_property</key>
-		<string>暗红色</string>
+		<string>通用款（不含锅盖和木铲）</string>
 		<key>original_price</key>
 		<integer>88</integer>
 		<key>current_price</key>
-		<real>39.9</real>
+		<real>48.8</real>
 	</dict>
 	<dict>
 		<key>goods_id</key>
@@ -26,13 +26,13 @@
 		<key>shop_id</key>
 		<string>s2</string>
 		<key>shop_name</key>
-		<string>精品旗舰店</string>
+		<string>美衣Shop</string>
 		<key>goods_name</key>
-		<string>商品2</string>
+		<string>波司登男装休闲短袖衬衫男2017夏季新款男士半袖时尚纯棉薄款衬衣</string>
 		<key>goods_image</key>
 		<string>goods2</string>
 		<key>goods_property</key>
-		<string>均码</string>
+		<string>41/180</string>
 		<key>goods_limit</key>
 		<string>1</string>
 		<key>original_price</key>
@@ -46,17 +46,17 @@
 		<key>shop_id</key>
 		<string>s2</string>
 		<key>shop_name</key>
-		<string>精品旗舰店</string>
+		<string>美衣Shop</string>
 		<key>goods_name</key>
-		<string>商品3</string>
+		<string>韩都衣舍2017韩版女装夏装新款字母刺绣宽松打底衫短袖T恤</string>
 		<key>goods_image</key>
 		<string>goods3</string>
 		<key>goods_property</key>
-		<string>通用款（不含锅盖和木铲）</string>
+		<string>暗红色</string>
 		<key>original_price</key>
-		<integer>55</integer>
+		<integer>99</integer>
 		<key>current_price</key>
-		<real>48.8</real>
+		<real>39.9</real>
 	</dict>
 	<dict>
 		<key>goods_id</key>
@@ -64,9 +64,9 @@
 		<key>shop_id</key>
 		<string>s4</string>
 		<key>shop_name</key>
-		<string>商品4旗舰店</string>
+		<string>RB店</string>
 		<key>goods_name</key>
-		<string>商品4</string>
+		<string>RB童鞋儿童布鞋男女童帆布鞋2017夏季新款板鞋透气小白鞋休闲鞋</string>
 		<key>goods_image</key>
 		<string>goods4</string>
 		<key>goods_property</key>
@@ -77,6 +77,44 @@
 		<integer>168</integer>
 		<key>current_price</key>
 		<real>102</real>
+	</dict>
+	<dict>
+		<key>goods_id</key>
+		<string>g5</string>
+		<key>shop_id</key>
+		<string>s4</string>
+		<key>shop_name</key>
+		<string>RB店</string>
+		<key>goods_name</key>
+		<string>RB厚底运动鞋夏季女2017新款百搭透气镂空板鞋女学生韩版小白鞋</string>
+		<key>goods_image</key>
+		<string>goods5</string>
+		<key>goods_property</key>
+		<string>37</string>
+		<key>original_price</key>
+		<integer>259</integer>
+		<key>current_price</key>
+		<integer>109</integer>
+	</dict>
+	<dict>
+		<key>goods_id</key>
+		<string>g6</string>
+		<key>shop_id</key>
+		<string>s4</string>
+		<key>shop_name</key>
+		<string>RB店</string>
+		<key>goods_name</key>
+		<string>RB胖MM棉麻夏季宽松白色纯棉t恤</string>
+		<key>goods_image</key>
+		<string>goods6</string>
+		<key>goods_property</key>
+		<string>均码</string>
+		<key>goods_limit</key>
+		<string>1</string>
+		<key>original_price</key>
+		<integer>129</integer>
+		<key>current_price</key>
+		<integer>78</integer>
 	</dict>
 </array>
 </plist>

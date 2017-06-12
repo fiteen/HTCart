@@ -36,9 +36,9 @@ static const CGFloat kLinePadding = 10;         // 不同行之间的间距
         _flowLayout = [[UICollectionViewFlowLayout alloc] init];
         _flowLayout.minimumInteritemSpacing = kPadding;
         _flowLayout.minimumLineSpacing = kLinePadding;
-        _flowLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
-        CGFloat width = (SCREEN_WIDTH - 10 * 2 - kPadding) / 2;
-        _flowLayout.itemSize = CGSizeMake(width, width + 110);
+        _flowLayout.sectionInset = UIEdgeInsetsMake(0, kLinePadding, 0, kLinePadding);
+        CGFloat width = (SCREEN_WIDTH - kLinePadding * 2 - kPadding) / 2;
+        _flowLayout.itemSize = CGSizeMake(width, width + 30);
         _flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     }
     return _flowLayout;
@@ -46,7 +46,7 @@ static const CGFloat kLinePadding = 10;         // 不同行之间的间距
 
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 49) collectionViewLayout:self.flowLayout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, NAVIGATIONBAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT - TABBAR_HEIGHT) collectionViewLayout:self.flowLayout];
         [self.view addSubview:_collectionView];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -117,10 +117,10 @@ static const CGFloat kLinePadding = 10;         // 不同行之间的间距
                     hasEqualGoods = YES;
                     int count = [[goodsDic valueForKey:@"goods_count"] intValue];
                     // 如果不超过限购 数量+1
-                    if (count < [goodsModel.goods_limit integerValue]) {
+                    if (count < [goodsModel.goods_limit integerValue] || goodsModel.goods_limit == nil) {
                         [goodsDic setValue:@(count + 1) forKey:@"goods_count"];
                     } else {
-                        NSLog(@"超过限购");
+                        [MBProgressHUD showError:@"超过限购，无法添加"];
                     }
                 }
             }
