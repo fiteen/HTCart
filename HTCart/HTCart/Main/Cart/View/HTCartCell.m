@@ -15,7 +15,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     _countView.resultBlock = ^(NSInteger number, BOOL isAdd) {
-        [self.delegate ChangeGoodsNumberCell:self Number:number];
+        [self.delegate changeGoodsNumberCell:self Number:number];
     };
 }
 
@@ -23,6 +23,9 @@
     [super layoutSubviews];
     for (UIView *subView in self.subviews) {
         if([subView isKindOfClass:NSClassFromString(@"UITableViewCellDeleteConfirmationView")]) {
+            if (subView.subviews.count < 2) {
+                return;
+            }
             UIView *deleteView = (UIView *)subView.subviews[0];
             deleteView.backgroundColor = [UIColor redColor];
             if (_deleteLabel) {

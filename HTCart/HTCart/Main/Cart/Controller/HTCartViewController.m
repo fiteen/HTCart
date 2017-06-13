@@ -22,6 +22,8 @@
     NSMutableArray *_cartArray;
     /** 选择总价 */
     CGFloat _totalPrice;
+    /** 是否点击页面右上角编辑按钮 */
+    BOOL _isPressEditButton;
 }
 
 /** 底部界面-全选/合计/结算 */
@@ -161,12 +163,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     [view.editButton setTitle:cartModel.isEdit ? @"完成" : @"编辑" forState:UIControlStateNormal];
     view.editButton.tag = TAG_HEADERBTN + section;
     [view.editButton addTarget:self action:@selector(editShopGoods:) forControlEvents:UIControlEventTouchUpInside];
-    // 若全选商品,编辑按钮隐藏
-    BOOL isAllEdit = YES;
-    for (HTCartModel *cartModel in _cartArray) {
-        isAllEdit *= cartModel.isEdit;
-    }
-    view.editButton.hidden = isAllEdit;
+    view.editButton.hidden = _isPressEditButton;
     return view;
 }
 
@@ -201,11 +198,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
             } else {
                 [_cartArray removeObjectAtIndex:indexPath.section];
             }
-            NSMutableArray *newCartArr = [NSMutableArray array];
-            for (HTCartModel *cartModel in _cartArray) {
-                [newCartArr addObject:[cartModel mj_JSONObject]];
-            }
-            [newCartArr writeToFile:_path atomically:YES];
+            [self writeToFile];
             [_tableView reloadData];
         }];
         [alertC addAction:sureAction];
@@ -214,10 +207,17 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     UITableViewRowAction *similarRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"    " handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         NSLog(@"找相似");
     }];
-    return @[deleteRowAction,similarRowAction];
+    HTCartModel *cartModel = _cartArray[indexPath.section];
+    if (!cartModel.isEdit) {
+        return @[deleteRowAction,similarRowAction];
+    }
+    return @[];
 }
 
-#pragma mark - HTHomeViewControllerDelegate
+#pragma mark - SEL
+/**
+ *  刷新购物车
+ */
 - (void)refreshCart {
     NSArray *plistArray = [[HTPlistTool readPlistArrayWithPath:self.path] mj_JSONObject];
     _cartArray = [NSMutableArray array];
@@ -236,8 +236,6 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     [self.tableView reloadData];
 }
 
-#pragma mark - SEL
-
 /**
  *  编辑商品属性
  */
@@ -249,9 +247,11 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
  *  编辑所有商品
  */
 - (void)editAllGoods:(UIBarButtonItem *)item {
-    item.title = [item.title isEqualToString:@"编辑"] ? @"完成" : @"编辑";
+    BOOL isEdit = [item.title isEqualToString:@"编辑"];
+    item.title =  isEdit ? @"完成" : @"编辑";
+    _isPressEditButton = isEdit;
     for (HTCartModel *cartModel in _cartArray) {
-        cartModel.isEdit = [item.title isEqualToString:@"编辑"] ? NO : YES;
+        cartModel.isEdit = isEdit;
     }
     [_tableView reloadData];
 }
@@ -274,11 +274,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
         } else {
             [_cartArray removeObjectAtIndex:section];
         }
-        NSMutableArray *newCartArr = [NSMutableArray array];
-        for (HTCartModel *cartModel in _cartArray) {
-            [newCartArr addObject:[cartModel mj_JSONObject]];
-        }
-        [newCartArr writeToFile:_path atomically:YES];
+        [self writeToFile];
         [_tableView reloadData];
     }];
     [alertC addAction:sureAction];
@@ -306,13 +302,13 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
         shopAllChoose &= detailModel.chooseState;
     }
     cartModel.chooseState = shopAllChoose;
-    [_tableView reloadData];
     
     BOOL allChoosen = YES;
     for (HTCartModel *cartModel in _cartArray) {
         allChoosen &= cartModel.chooseState;
     }
     self.bottomView.allChooseButton.selected = allChoosen;
+    [_tableView reloadData];
     [self updateBottomView];
 }
 
@@ -326,6 +322,11 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     for (HTCartDetailModel *detailModel in cartModel.goods) {
         detailModel.chooseState = button.selected;
     }
+    BOOL allChoosen = YES;
+    for (HTCartModel *cartModel in _cartArray) {
+        allChoosen &= cartModel.chooseState;
+    }
+    self.bottomView.allChooseButton.selected = allChoosen;
     [_tableView reloadData];
     [self updateBottomView];
 }
@@ -369,21 +370,35 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 /**
- *  修改商品数量
- */
--(void)ChangeGoodsNumberCell:(UITableViewCell *)cell Number:(NSInteger)num {
-    NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
-    HTCartModel *cartModel = _cartArray[indexPath.section];
-    cartModel.goods[indexPath.row].goods_count = [NSNumber numberWithInteger:num];
-    // 存储数据
+ *  将购物车信息本地化存储
+ **/
+- (void)writeToFile {
     NSMutableArray *newCartArr = [NSMutableArray array];
     for (HTCartModel *cartModel in _cartArray) {
-        NSArray *cartDic = [cartModel mj_JSONObject];
-        [cartDic setValue:@NO forKey:@"isEdit"];
+        NSMutableDictionary *cartDic = [cartModel mj_JSONObject];
+        [cartDic removeObjectForKey:@"isEdit"];
+        [cartDic removeObjectForKey:@"chooseState"];
+        NSMutableArray *goods = [cartDic valueForKey:@"goods"];
+        for (NSMutableDictionary *detailDic in goods) {
+            [detailDic removeObjectForKey:@"chooseState"];
+        }
         [newCartArr addObject:cartDic];
     }
     [newCartArr writeToFile:_path atomically:YES];
 }
+
+#pragma mark - HTHomeViewControllerDelegate
+
+/**
+ *  修改商品数量
+ */
+-(void)changeGoodsNumberCell:(UITableViewCell *)cell Number:(NSInteger)num {
+    NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
+    HTCartModel *cartModel = _cartArray[indexPath.section];
+    cartModel.goods[indexPath.row].goods_count = [NSNumber numberWithInteger:num];
+    [self writeToFile];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

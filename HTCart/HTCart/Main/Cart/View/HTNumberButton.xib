@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -38,6 +38,8 @@
                             <connections>
                                 <action selector="subtractTouchDown:" destination="-1" eventType="touchDown" id="bZW-QP-ny2"/>
                                 <action selector="touchUp:" destination="-1" eventType="touchUpInside" id="R2B-4z-uGD"/>
+                                <action selector="touchUp:" destination="-1" eventType="touchCancel" id="X4E-bR-I0L"/>
+                                <action selector="touchUp:" destination="-1" eventType="touchUpOutside" id="pyQ-tP-20i"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4lT-TT-2hN">
@@ -53,6 +55,8 @@
                             <connections>
                                 <action selector="addTouchDown:" destination="-1" eventType="touchDown" id="9Qa-pe-ugB"/>
                                 <action selector="touchUp:" destination="-1" eventType="touchUpInside" id="CeX-N3-I4Q"/>
+                                <action selector="touchUp:" destination="-1" eventType="touchCancel" id="KuR-of-Pvs"/>
+                                <action selector="touchUp:" destination="-1" eventType="touchUpOutside" id="eat-Rc-F8y"/>
                             </connections>
                         </button>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bwv-uc-Y3o">

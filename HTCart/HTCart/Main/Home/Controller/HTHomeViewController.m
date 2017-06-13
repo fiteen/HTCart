@@ -122,6 +122,9 @@ static const CGFloat kLinePadding = 10;         // 不同行之间的间距
                     } else {
                         [MBProgressHUD showError:@"超过限购，无法添加"];
                     }
+                    // 移除重复信息
+                    [goodsDic removeObjectForKey:@"shop_id"];
+                    [goodsDic removeObjectForKey:@"shop_name"];
                 }
             }
             if (!hasEqualGoods) {
@@ -136,6 +139,8 @@ static const CGFloat kLinePadding = 10;         // 不同行之间的间距
     if (!hasEqualShop) {
         NSMutableArray *goodsArr = [NSMutableArray array];
         NSMutableDictionary *newCartDic = [goodsModel mj_JSONObject];
+        [newCartDic removeObjectForKey:@"shop_id"];
+        [newCartDic removeObjectForKey:@"shop_name"];
         [newCartDic setValue:@(1) forKey:@"goods_count"];
         [goodsArr addObject:newCartDic];
         NSMutableDictionary *shopDic = [NSMutableDictionary dictionaryWithDictionary:@{@"shop_id":goodsModel.shop_id,@"shop_name":goodsModel.shop_name,@"goods":goodsArr}];

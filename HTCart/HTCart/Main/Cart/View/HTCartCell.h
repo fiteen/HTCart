@@ -11,7 +11,7 @@
 
 @protocol HTCartCellDelegate <NSObject>
 
--(void)ChangeGoodsNumberCell:(UITableViewCell *)cell Number:(NSInteger)num;
+-(void)changeGoodsNumberCell:(UITableViewCell *)cell Number:(NSInteger)num;
 
 @end
 
