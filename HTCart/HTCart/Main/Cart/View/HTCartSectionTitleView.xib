@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HTCartSectionTitleView">
+            <connections>
+                <outlet property="chooseButton" destination="Qq3-6b-OC0" id="o0s-DG-SY9"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="bWp-6m-P8y"/>
+                <outlet property="editButton" destination="CiK-Kc-Qs1" id="wzI-dF-al1"/>
+                <outlet property="shopButton" destination="emC-is-ibJ" id="0Lb-8n-fx1"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qq3-6b-OC0">
+                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="GA4-kk-Wwb"/>
+                        <constraint firstAttribute="height" constant="40" id="MAG-El-mb8"/>
+                    </constraints>
+                    <state key="normal" image="icon_orderpay_normal"/>
+                    <state key="selected" image="icon_orderpay_selected"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="emC-is-ibJ">
+                    <rect key="frame" x="40" y="0.0" width="30" height="40"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.39603209499999997" green="0.39610502120000002" blue="0.39602747560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CiK-Kc-Qs1">
+                    <rect key="frame" x="335" y="0.0" width="30" height="40"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="编辑">
+                        <color key="titleColor" red="0.39603209499999997" green="0.39610502120000002" blue="0.39602747560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="emC-is-ibJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="1jl-W8-kC8"/>
+                <constraint firstItem="CiK-Kc-Qs1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="GL5-ap-xIv"/>
+                <constraint firstAttribute="bottom" secondItem="CiK-Kc-Qs1" secondAttribute="bottom" id="OMH-va-ZKT"/>
+                <constraint firstItem="Qq3-6b-OC0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Tcp-zc-tzL"/>
+                <constraint firstAttribute="trailing" secondItem="CiK-Kc-Qs1" secondAttribute="trailing" constant="10" id="ePK-ZB-npS"/>
+                <constraint firstAttribute="bottom" secondItem="emC-is-ibJ" secondAttribute="bottom" id="hu8-ga-5QC"/>
+                <constraint firstItem="Qq3-6b-OC0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="yLL-iT-Wk1"/>
+                <constraint firstItem="emC-is-ibJ" firstAttribute="leading" secondItem="Qq3-6b-OC0" secondAttribute="trailing" id="ypb-OH-B9u"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="68.5" y="-209"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_orderpay_normal" width="20" height="20"/>
+        <image name="icon_orderpay_selected" width="20" height="20"/>
+    </resources>
+</document>

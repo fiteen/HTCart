@@ -10,13 +10,15 @@
 
 @interface HTCartSectionTitleView : UIView
 
+@property (strong, nonatomic) IBOutlet UIView *contentView;
+
 /** 选择按钮 */
-@property (nonatomic, strong) UIButton *chooseButton;
+@property (weak, nonatomic) IBOutlet UIButton *chooseButton;
 
 /** 商铺按钮 */
-@property (nonatomic, strong) UIButton *shopButton;
+@property (weak, nonatomic) IBOutlet UIButton *shopButton;
 
 /** 编辑按钮 */
-@property (nonatomic, strong) UIButton *editButton;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
 
 @end

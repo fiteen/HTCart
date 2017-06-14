@@ -11,7 +11,7 @@
 #import "HTCartModel.h"
 #import "HTCartSectionTitleView.h"
 #import "HTCartCell.h"
-#import "HTNumberButton.h"
+//#import "HTNumberButton.h"
 #import "HTCartBottomView.h"
 
 #define TAG_CELLBTN 0x1000
@@ -38,17 +38,15 @@
 
 @implementation HTCartViewController
 
-static const CGFloat bottomViewHeight = 50;
-
 static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 
 - (HTCartBottomView *)bottomView {
     if (!_bottomView) {
         _bottomView = [[HTCartBottomView alloc] init];
         if (self.navigationController.viewControllers.count == 1) {
-            _bottomView.frame = CGRectMake(0, SCREEN_HEIGHT - TABBAR_HEIGHT - bottomViewHeight, SCREEN_WIDTH, bottomViewHeight);
+            _bottomView.frame = CGRectMake(0, SCREEN_HEIGHT - TABBAR_HEIGHT - BOTTOMVIEW_HEIGHT, SCREEN_WIDTH, BOTTOMVIEW_HEIGHT);
         } else {
-            _bottomView.frame = CGRectMake(0, SCREEN_HEIGHT - bottomViewHeight, SCREEN_WIDTH, bottomViewHeight);
+            _bottomView.frame = CGRectMake(0, SCREEN_HEIGHT - BOTTOMVIEW_HEIGHT, SCREEN_WIDTH, BOTTOMVIEW_HEIGHT);
         }
         [_bottomView.allChooseButton addTarget:self action:@selector(clickAllChooseButton:) forControlEvents:UIControlEventTouchUpInside];
         [_bottomView.settleButton addTarget:self action:@selector(clickSettleButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -71,9 +69,9 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     if (!_tableView) {
         _tableView = [[UITableView alloc] init];
         if (self.navigationController.viewControllers.count == 1) {
-            _tableView.frame = CGRectMake(0, NAVIGATIONBAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - TABBAR_HEIGHT - NAVIGATIONBAR_HEIGHT- bottomViewHeight);
+            _tableView.frame = CGRectMake(0, NAVIGATIONBAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - TABBAR_HEIGHT - NAVIGATIONBAR_HEIGHT- BOTTOMVIEW_HEIGHT);
         } else {
-            _tableView.frame = CGRectMake(0, NAVIGATIONBAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT - bottomViewHeight);
+            _tableView.frame = CGRectMake(0, NAVIGATIONBAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT - BOTTOMVIEW_HEIGHT);
         }
         _tableView.tableFooterView = [UIView new];
         _tableView.backgroundColor = [UIColor clearColor];
@@ -92,13 +90,19 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     [self initView];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    // 初始化信息
+    [self refreshCart];
+    [self updateBottomView];
+    self.bottomView.allChooseButton.selected = NO;
+}
+
 - (void)initView {
     self.view.backgroundColor = BACKGROUND_GRAY_COLOR;
     self.navigationItem.title = @"购物车";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editAllGoods:)];
     self.bottomView.hidden = NO;
-    
-    [self refreshCart];
     
     UINavigationController *navi = self.tabBarController.viewControllers[0];
     HTHomeViewController *homeVC = navi.viewControllers.firstObject;
@@ -124,6 +128,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     if (cartModel.isEdit) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"HTCartCell" owner:self options:nil] objectAtIndex:1];
         cell.delegate = self;
+        cell.countView.delegate = self;
         cell.countView.maxValue = cartModel.goods[indexPath.row].goods_limit ==  nil ? LONG_MAX : [cartModel.goods[indexPath.row].goods_limit integerValue];
         cell.countView.currentNumber = [cartModel.goods[indexPath.row].goods_count integerValue];
         cell.propertyEditLabel.text = cartModel.goods[indexPath.row].goods_property;
@@ -184,6 +189,14 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     return 0;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    HTCartModel *cartModel = _cartArray[indexPath.section];
+    if (cartModel.isEdit) {
+        return NO;
+    }
+    return YES;
+}
+
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"    " handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"确认要删除这个宝贝吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -200,6 +213,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
             }
             [self writeToFile];
             [_tableView reloadData];
+            [self updateBottomView];
         }];
         [alertC addAction:sureAction];
         [self.navigationController presentViewController:alertC animated:YES completion:nil];
@@ -207,11 +221,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     UITableViewRowAction *similarRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"    " handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         NSLog(@"找相似");
     }];
-    HTCartModel *cartModel = _cartArray[indexPath.section];
-    if (!cartModel.isEdit) {
-        return @[deleteRowAction,similarRowAction];
-    }
-    return @[];
+    return @[deleteRowAction,similarRowAction];
 }
 
 #pragma mark - SEL
@@ -276,6 +286,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
         }
         [self writeToFile];
         [_tableView reloadData];
+        [self updateBottomView];
     }];
     [alertC addAction:sureAction];
     [self.navigationController presentViewController:alertC animated:YES completion:nil];
@@ -297,11 +308,11 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     button.selected = !button.selected;
     HTCartModel *cartModel = _cartArray[button.tag / TAG_CELLBTN];
     cartModel.goods[button.tag % TAG_CELLBTN].chooseState = button.selected;
-    BOOL shopAllChoose = YES;
+    BOOL shopAllChoosen = YES;
     for (HTCartDetailModel *detailModel in cartModel.goods) {
-        shopAllChoose &= detailModel.chooseState;
+        shopAllChoosen &= detailModel.chooseState;
     }
-    cartModel.chooseState = shopAllChoose;
+    cartModel.chooseState = shopAllChoosen;
     
     BOOL allChoosen = YES;
     for (HTCartModel *cartModel in _cartArray) {
@@ -399,6 +410,12 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     [self writeToFile];
 }
 
+#pragma mark - HTNumberButtonDelegate
+- (void)ht_numberButton:(__kindof UIView *)numberButton
+                 number:(NSInteger)number
+                  isAdd:(BOOL)isAdd {
+    [self updateBottomView];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

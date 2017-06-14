@@ -70,6 +70,9 @@
 
 -(void)pickerDoneClicked {
     [_numberTextField resignFirstResponder];
+    if ([_numberTextField.text integerValue] < _minValue || [_numberTextField.text integerValue] > _maxValue) {
+        [MBProgressHUD showHint:@"数量超出范围"];
+    }
     [self checkNumberWhenUpdate];
 }
 
@@ -103,7 +106,7 @@
         UIResponder* nextResponder = [next nextResponder];
         if ([nextResponder isKindOfClass:[UITableView class]]) {
             UITableView *tableView = (UITableView *)nextResponder;
-            tableView.frame = CGRectMake(0, NAVIGATIONBAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT);
+            tableView.frame = CGRectMake(0, NAVIGATIONBAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT - TABBAR_HEIGHT - BOTTOMVIEW_HEIGHT);
         }
     }
 }

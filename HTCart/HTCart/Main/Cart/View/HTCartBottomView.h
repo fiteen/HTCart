@@ -10,13 +10,15 @@
 
 @interface HTCartBottomView : UIView
 
+@property (strong, nonatomic) IBOutlet UIView *contentView;
+
 /** 全选按钮 */
-@property (nonatomic, strong) UIButton *allChooseButton;
+@property (weak, nonatomic) IBOutlet UIButton *allChooseButton;
 
 /** 合计金额 */
-@property (nonatomic, strong) UILabel *totalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 
 /** 结算按钮 */
-@property (nonatomic, strong) UIButton *settleButton;
+@property (weak, nonatomic) IBOutlet UIButton *settleButton;
 
 @end

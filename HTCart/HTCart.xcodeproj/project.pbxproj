@@ -16,6 +16,8 @@
 		252F67C41ED9571700E5E5C8 /* HTTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 252F67C31ED9571700E5E5C8 /* HTTabBarViewController.m */; };
 		252F67CD1ED95DE600E5E5C8 /* UIButton+ImageTitleSpacing.m in Sources */ = {isa = PBXBuildFile; fileRef = 252F67CC1ED95DE600E5E5C8 /* UIButton+ImageTitleSpacing.m */; };
 		252F67D11ED96A2E00E5E5C8 /* HTCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 252F67D01ED96A2E00E5E5C8 /* HTCartViewController.m */; };
+		25658EB31EF1056500F1FFF0 /* HTCartBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25658EB21EF1056500F1FFF0 /* HTCartBottomView.xib */; };
+		25658EB51EF114E800F1FFF0 /* HTCartSectionTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25658EB41EF114E800F1FFF0 /* HTCartSectionTitleView.xib */; };
 		256732321EE8F4B400DF1A0E /* HTNumberButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 256732311EE8F4B400DF1A0E /* HTNumberButton.m */; };
 		256732341EE92AAF00DF1A0E /* HTNumberButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 256732331EE92AAF00DF1A0E /* HTNumberButton.xib */; };
 		2569CEFF1EDE6DBE0091B2A9 /* HTCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2569CEFE1EDE6DBE0091B2A9 /* HTCollectionViewCell.m */; };
@@ -53,6 +55,8 @@
 		252F67CC1ED95DE600E5E5C8 /* UIButton+ImageTitleSpacing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ImageTitleSpacing.m"; sourceTree = "<group>"; };
 		252F67CF1ED96A2E00E5E5C8 /* HTCartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCartViewController.h; sourceTree = "<group>"; };
 		252F67D01ED96A2E00E5E5C8 /* HTCartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCartViewController.m; sourceTree = "<group>"; };
+		25658EB21EF1056500F1FFF0 /* HTCartBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HTCartBottomView.xib; sourceTree = "<group>"; };
+		25658EB41EF114E800F1FFF0 /* HTCartSectionTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HTCartSectionTitleView.xib; sourceTree = "<group>"; };
 		256732301EE8F4B400DF1A0E /* HTNumberButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTNumberButton.h; sourceTree = "<group>"; };
 		256732311EE8F4B400DF1A0E /* HTNumberButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTNumberButton.m; sourceTree = "<group>"; };
 		256732331EE92AAF00DF1A0E /* HTNumberButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HTNumberButton.xib; sourceTree = "<group>"; };
@@ -235,8 +239,10 @@
 			children = (
 				2575F8281EE5507C00C84A6D /* HTCartSectionTitleView.h */,
 				2575F8291EE5507C00C84A6D /* HTCartSectionTitleView.m */,
+				25658EB41EF114E800F1FFF0 /* HTCartSectionTitleView.xib */,
 				2569CF011EDE9D6D0091B2A9 /* HTCartBottomView.h */,
 				2569CF021EDE9D6D0091B2A9 /* HTCartBottomView.m */,
+				25658EB21EF1056500F1FFF0 /* HTCartBottomView.xib */,
 				2569CF0A1EDEC07C0091B2A9 /* HTCartCell.h */,
 				2569CF0B1EDEC07C0091B2A9 /* HTCartCell.m */,
 				2569CF0C1EDEC07C0091B2A9 /* HTCartCell.xib */,
@@ -356,8 +362,10 @@
 				256732341EE92AAF00DF1A0E /* HTNumberButton.xib in Resources */,
 				2569CF0E1EDEC07C0091B2A9 /* HTCartCell.xib in Resources */,
 				252F67BA1ED94D7A00E5E5C8 /* LaunchScreen.storyboard in Resources */,
+				25658EB31EF1056500F1FFF0 /* HTCartBottomView.xib in Resources */,
 				252F67B71ED94D7A00E5E5C8 /* Assets.xcassets in Resources */,
 				252F67B51ED94D7A00E5E5C8 /* Main.storyboard in Resources */,
+				25658EB51EF114E800F1FFF0 /* HTCartSectionTitleView.xib in Resources */,
 				2569CF101EDEC2400091B2A9 /* goodsList.plist in Resources */,
 				2587DF161EEE2E2000E5B043 /* MBProgressHUD.bundle in Resources */,
 			);
