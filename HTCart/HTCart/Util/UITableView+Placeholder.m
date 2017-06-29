@@ -10,8 +10,7 @@
 
 @implementation UITableView (Placeholder)
 
-- (void)placeholderBaseOnNumber:(NSInteger)numberOfRows iconConfig:(void (^) (UIImageView *imageView))iconConfig textConfig:(void (^) (UILabel *label))textConfig;
-{
+- (void)placeholderBaseOnNumber:(NSInteger)numberOfRows iconConfig:(void (^) (UIImageView *imageView))iconConfig textConfig:(void (^) (UILabel *label))textConfig {
     // initial UITableViewPlaceholderView
     UITableViewPlaceholderView *placeholderView = [self viewWithTag:300323];
     if (!placeholderView) {
@@ -54,13 +53,7 @@
     placeholderView.frame = self.bounds;
 }
 
-- (void)clean;
-{
-    
-}
-
-- (void)placeholderBaseOnNumber:(NSInteger)numberOfRows withConf:(HTTablePlaceholderConf *)conf
-{
+- (void)placeholderBaseOnNumber:(NSInteger)numberOfRows withConf:(HTTablePlaceholderConf *)conf {
     [self placeholderBaseOnNumber:numberOfRows iconConfig:^(UIImageView *imageView) {
         imageView.animationImages = conf.animImages;
         imageView.animationDuration = conf.animDuration;
@@ -81,45 +74,37 @@
 
 #pragma mark setter/getter
 
-- (void)setOriginalSeparatorStyle:(UITableViewCellSeparatorStyle)originalSeparatorStyle
-{
+- (void)setOriginalSeparatorStyle:(UITableViewCellSeparatorStyle)originalSeparatorStyle {
     objc_setAssociatedObject(self, @"originalSeparatorStyle", @(originalSeparatorStyle), OBJC_ASSOCIATION_ASSIGN);
 }
 
-- (UITableViewCellSeparatorStyle)originalSeparatorStyle
-{
+- (UITableViewCellSeparatorStyle)originalSeparatorStyle {
     return [objc_getAssociatedObject(self, @"originalSeparatorStyle") integerValue];
 }
 
 // did setup
-- (void)setDidSetup:(BOOL)didSetup
-{
+- (void)setDidSetup:(BOOL)didSetup {
     objc_setAssociatedObject(self, @"didSetup", @(didSetup), OBJC_ASSOCIATION_ASSIGN);
 }
 
-- (BOOL)didSetup
-{
+- (BOOL)didSetup {
     return [objc_getAssociatedObject(self, @"didSetup") boolValue];
 }
 
 // placeholder view
-- (void)setPlaceholderView:(UITableViewPlaceholderView *)placeholderView
-{
+- (void)setPlaceholderView:(UITableViewPlaceholderView *)placeholderView {
     objc_setAssociatedObject(self, @"placeholderView", placeholderView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (UITableViewPlaceholderView *)placeholderView
-{
+- (UITableViewPlaceholderView *)placeholderView {
     return objc_getAssociatedObject(self, @"placeholderView");
 }
+
 @end
-
-
 
 @implementation UITableViewPlaceholderView
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.placeholderImageView = [UIImageView new];
@@ -131,8 +116,7 @@
     return self;
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     CGFloat maxHeight = 0;
     if (_placeholderImageView.image) {
@@ -164,13 +148,13 @@
     center.x = self.center.x;
     _placeholderLabel.center = center;
 }
+
 @end
 
 
 @implementation HTTablePlaceholderConf
 
-+ (instancetype)defaultConf;
-{
++ (instancetype)defaultConf {
     static dispatch_once_t onceToken;
     static HTTablePlaceholderConf *sharedObject = nil;
     dispatch_once(&onceToken, ^{
@@ -182,8 +166,7 @@
     return sharedObject;
 }
 
-- (void)_setupDefaultValue
-{
+- (void)_setupDefaultValue {
     self.placeholderText = @"没有发现数据";
     self.placeholderImage= nil;
     self.animImages      = nil;

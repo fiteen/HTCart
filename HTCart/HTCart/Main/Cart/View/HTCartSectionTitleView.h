@@ -12,13 +12,11 @@
 
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 
-/** 选择按钮 */
+/** 选择按钮*/
 @property (weak, nonatomic) IBOutlet UIButton *chooseButton;
-
-/** 商铺按钮 */
+/** 商铺按钮*/
 @property (weak, nonatomic) IBOutlet UIButton *shopButton;
-
-/** 编辑按钮 */
+/** 编辑按钮*/
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
 
 @end

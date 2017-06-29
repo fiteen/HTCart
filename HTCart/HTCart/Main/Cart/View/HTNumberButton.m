@@ -16,16 +16,16 @@
 
 @interface HTNumberButton ()<UITextFieldDelegate>
 
-/** 减按钮 */
+/** 减按钮*/
 @property (weak, nonatomic) IBOutlet UIButton *subtractButton;
 
-/** 加按钮 */
+/** 加按钮*/
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 
-/** 数字显示/输入框 */
+/** 数字显示/输入框*/
 @property (weak, nonatomic) IBOutlet UITextField *numberTextField;
 
-/** 快速加减定时器 */
+/** 快速加减定时器*/
 @property (nonatomic, strong) NSTimer *timer;
 
 @end
@@ -53,7 +53,7 @@
 }
 
 /**
- *  在键盘上方的Toolbar上添加完成按钮
+ * 在键盘上方的Toolbar上添加完成按钮
  */
 - (void)addCompleteButtonOnKeyboard {
     UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
@@ -130,7 +130,7 @@
 #pragma mark - IBAction
 
 /**
- *  点击: 单击逐次减少,长按连续快速减少
+ * 点击: 单击逐次减少,长按连续快速减少
  */
 - (IBAction)subtractTouchDown:(id)sender {
     [_numberTextField resignFirstResponder];
@@ -139,7 +139,7 @@
 }
 
 /**
- *  点击: 单击逐次增加,长按连续快速增加
+ * 点击: 单击逐次增加,长按连续快速增加
  */
 - (IBAction)addTouchDown:(id)sender {
     [_numberTextField resignFirstResponder];
@@ -148,7 +148,7 @@
 }
 
 /**
- *  手指松开
+ * 手指松开
  */
 - (IBAction)touchUp:(id)sender {
     [self invalidateTimer];
@@ -157,7 +157,7 @@
 #pragma mark - SEL
 
 /**
- *  减运算
+ * 减运算
  */
 - (void)subtractAction {
     [self checkNumberWhenUpdate];
@@ -171,7 +171,7 @@
 }
 
 /**
- *  加运算
+ * 加运算
  */
 - (void)addAction {
     [self checkNumberWhenUpdate];
@@ -185,7 +185,7 @@
 }
 
 /**
- *  销毁定时器
+ * 销毁定时器
  */
 - (void)invalidateTimer {
     if (_timer.isValid) {
@@ -194,7 +194,7 @@
 }
 
 /**
- *  响应
+ * 响应
  */
 - (void)buttonClickCallBackWithAddAction:(BOOL)addStatus {
     _resultBlock ? _resultBlock(_numberTextField.text.integerValue, addStatus) : nil;
@@ -204,7 +204,7 @@
 }
 
 /**
- *  检查TextField中数字的合法性,并修正
+ * 检查TextField中数字的合法性,并修正
  */
 - (void)checkNumberWhenUpdate {
     NSString *minValueString = [NSString stringWithFormat:@"%ld",_minValue];

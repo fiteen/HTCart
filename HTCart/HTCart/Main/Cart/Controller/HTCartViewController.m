@@ -11,25 +11,24 @@
 #import "HTCartModel.h"
 #import "HTCartSectionTitleView.h"
 #import "HTCartCell.h"
-//#import "HTNumberButton.h"
 #import "HTCartBottomView.h"
 
 #define TAG_CELLBTN 0x1000
 #define TAG_HEADERBTN 0x0100
 
 @interface HTCartViewController ()<UITableViewDelegate,UITableViewDataSource,HTHomeViewControllerDelegate,HTCartCellDelegate> {
-    /** 购物车清单 */
+    /** 购物车清单*/
     NSMutableArray *_cartArray;
-    /** 选择总价 */
+    /** 选择总价*/
     CGFloat _totalPrice;
-    /** 是否点击页面右上角编辑按钮 */
+    /** 是否点击页面右上角编辑按钮*/
     BOOL _isPressEditButton;
 }
 
-/** 底部界面-全选/合计/结算 */
+/** 底部界面-全选/合计/结算*/
 @property (nonatomic, strong) HTCartBottomView *bottomView;
 
-/** 购物车清单本地存储地址 */
+/** 购物车清单本地存储地址*/
 @property (nonatomic, strong) NSString *path;
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -47,7 +46,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
             _bottomView.frame = CGRectMake(0, SCREEN_HEIGHT - TABBAR_HEIGHT - BOTTOMVIEW_HEIGHT, SCREEN_WIDTH, BOTTOMVIEW_HEIGHT);
         } else {
             _bottomView.frame = CGRectMake(0, SCREEN_HEIGHT - BOTTOMVIEW_HEIGHT, SCREEN_WIDTH, BOTTOMVIEW_HEIGHT);
-        }
+        } 
         [_bottomView.allChooseButton addTarget:self action:@selector(clickAllChooseButton:) forControlEvents:UIControlEventTouchUpInside];
         [_bottomView.settleButton addTarget:self action:@selector(clickSettleButton:) forControlEvents:UIControlEventTouchUpInside];
         _bottomView.totalLabel.text = @"合计: ¥ 0.00";
@@ -128,7 +127,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     if (cartModel.isEdit) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"HTCartCell" owner:self options:nil] objectAtIndex:1];
         cell.delegate = self;
-        cell.countView.delegate = self;
+        cell.countView.delegate = (id)self;
         cell.countView.maxValue = cartModel.goods[indexPath.row].goods_limit ==  nil ? LONG_MAX : [cartModel.goods[indexPath.row].goods_limit integerValue];
         cell.countView.currentNumber = [cartModel.goods[indexPath.row].goods_count integerValue];
         cell.propertyEditLabel.text = cartModel.goods[indexPath.row].goods_property;
@@ -226,7 +225,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 
 #pragma mark - SEL
 /**
- *  刷新购物车
+ * 刷新购物车
  */
 - (void)refreshCart {
     NSArray *plistArray = [[HTPlistTool readPlistArrayWithPath:self.path] mj_JSONObject];
@@ -247,14 +246,14 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 /**
- *  编辑商品属性
+ * 编辑商品属性
  */
 - (void)editPropertyButton:(UIButton *)button {
     NSLog(@"编辑属性");
 }
 
 /**
- *  编辑所有商品
+ * 编辑所有商品
  */
 - (void)editAllGoods:(UIBarButtonItem *)item {
     BOOL isEdit = [item.title isEqualToString:@"编辑"];
@@ -267,7 +266,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 /**
- *  删除商品
+ * 删除商品
  */
 - (void)deleteGoods:(UIButton *)button {
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"确认要删除这个宝贝吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -293,7 +292,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 /**
- *  编辑商铺内的商品
+ * 编辑商铺内的商品
  */
 - (void)editShopGoods:(UIButton *)button {
     HTCartModel *cartModel = _cartArray[button.tag - TAG_HEADERBTN];
@@ -302,7 +301,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 /**
- *  单选商品
+ * 单选商品
  */
 - (void)clickSingleChooseButton:(UIButton *)button {
     button.selected = !button.selected;
@@ -324,7 +323,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 /**
- *  全选某商铺所有商品
+ * 全选某商铺所有商品
  */
 - (void)clickShopAllChooseButton:(UIButton *)button {
     button.selected = !button.selected;
@@ -343,7 +342,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 /**
- *  全选商品
+ * 全选商品
  */
 - (void)clickAllChooseButton:(UIButton *)button {
     button.selected = !button.selected;
@@ -358,14 +357,14 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 /**
- *  结算
+ * 结算
  */
 - (void)clickSettleButton:(UIButton *)button {
     NSLog(@"结算");
 }
 
 /**
- *  修改底部信息
+ * 修改底部信息
  */
 - (void)updateBottomView {
     _totalPrice = 0;
@@ -381,7 +380,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 /**
- *  将购物车信息本地化存储
+ * 将购物车信息本地化存储
  **/
 - (void)writeToFile {
     NSMutableArray *newCartArr = [NSMutableArray array];
@@ -399,11 +398,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 #pragma mark - HTHomeViewControllerDelegate
-
-/**
- *  修改商品数量
- */
--(void)changeGoodsNumberCell:(UITableViewCell *)cell Number:(NSInteger)num {
+- (void)changeGoodsNumberCell:(UITableViewCell *)cell Number:(NSInteger)num {
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
     HTCartModel *cartModel = _cartArray[indexPath.section];
     cartModel.goods[indexPath.row].goods_count = [NSNumber numberWithInteger:num];

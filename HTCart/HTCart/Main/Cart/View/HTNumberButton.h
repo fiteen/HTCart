@@ -30,12 +30,10 @@
 IB_DESIGNABLE
 @interface HTNumberButton : UIView
 
-//+ (instancetype)numberButtonWithFrame:(CGRect)frame;
-
-/** 代理方法 */
+/** 代理方法*/
 @property (nonatomic, weak) id<HTNumberButtonDelegate>delegate;
 
-/** 点击加减按钮的block回调 */
+/** 点击加减按钮的block回调*/
 @property (nonatomic, copy) void(^resultBlock)(NSInteger number, BOOL isAdd);
 
 #pragma mark - 自定义样式属性
@@ -43,13 +41,13 @@ IB_DESIGNABLE
 /** 是否可以使用键盘输入,默认YES*/
 @property (nonatomic, assign, getter=isSupportKeyboard) IBInspectable BOOL supportKeyboard;
 
-/** 输入框中的内容 */
+/** 输入框中的内容*/
 @property (nonatomic, assign) NSInteger currentNumber;
 
-/** 最小值, 默认为1 */
+/** 最小值, 默认为1*/
 @property (nonatomic, assign) IBInspectable NSInteger minValue;
 
-/** 最大值 */
+/** 最大值*/
 @property (nonatomic, assign) NSInteger maxValue;
 
 @property (weak, nonatomic) IBOutlet UIView *view;
@@ -60,9 +58,9 @@ IB_DESIGNABLE
 @interface NSString (HTNumberButton)
 
 /**
+ * 字符串 nil, @"", @"  ", @"\n" returns NO;
  *
- *  字符串 nil, @"", @"  ", @"\n" returns NO;
- *  其他 returns YES;
+ * 其他 returns YES;
  *
  */
 - (BOOL)ht_isNotBlank;

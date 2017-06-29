@@ -11,13 +11,12 @@
 @implementation UIButton (ImageTitleSpacing)
 
 - (void)layoutButtonWithEdgeInsetsStyle:(HTButtonEdgeInsetsStyle)style
-                        imageTitleSpace:(CGFloat)space
-{
+                        imageTitleSpace:(CGFloat)space {
     
     /**
-     *  前置知识点：titleEdgeInsets是title相对于其上下左右的inset，跟tableView的contentInset是类似的，
-     *  如果只有title，那它上下左右都是相对于button的，image也是一样；
-     *  如果同时有image和label，那这时候image的上左下是相对于button，右边是相对于label的；title的上右下是相对于button，左边是相对于image的。
+     * 前置知识点：titleEdgeInsets是title相对于其上下左右的inset，跟tableView的contentInset是类似的，
+     * 如果只有title，那它上下左右都是相对于button的，image也是一样；
+     * 如果同时有image和label，那这时候image的上左下是相对于button，右边是相对于label的；title的上右下是相对于button，左边是相对于image的。
      */
     
     // 1. 得到imageView和titleLabel的宽、高

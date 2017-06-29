@@ -12,13 +12,11 @@
 
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 
-/** 全选按钮 */
+/** 全选按钮*/
 @property (weak, nonatomic) IBOutlet UIButton *allChooseButton;
-
-/** 合计金额 */
+/** 合计金额*/
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
-
-/** 结算按钮 */
+/** 结算按钮*/
 @property (weak, nonatomic) IBOutlet UIButton *settleButton;
 
 @end

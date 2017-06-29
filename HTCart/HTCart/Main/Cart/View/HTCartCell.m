@@ -43,7 +43,7 @@
             if (_similarLabel) {
                 [_similarLabel removeFromSuperview];
             }
-            _similarLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, deleteView.frame.size.width, deleteView.frame.size.height)];
+            _similarLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, similarView.frame.size.width, similarView.frame.size.height)];
             _similarLabel.font = [UIFont systemFontOfSize:12];
             _similarLabel.textColor = [UIColor whiteColor];
             _similarLabel.textAlignment = NSTextAlignmentCenter;

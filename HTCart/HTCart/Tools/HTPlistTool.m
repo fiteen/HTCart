@@ -10,7 +10,7 @@
 
 @implementation HTPlistTool
 
-/* 读取数组类型的plist **/
+/** 读取数组类型的plist */
 + (NSMutableArray *)readPlistArrayWithPath:(NSString *)path {
     NSMutableArray *mutArr = nil;
     if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {//文件不存在时初始化地址数组
@@ -21,14 +21,14 @@
     return mutArr;
 }
 
-/* 将字典从数组中删除，然后更新plist **/
+/** 将字典从数组中删除，然后更新plist */
 + (void)deletePlistDicInArrWithPath:(NSString *)path withMutDic:(NSMutableDictionary *)mutDic {
     NSMutableArray *arr = [self readPlistArrayWithPath:path];
     [arr removeObject:mutDic];
     [arr writeToFile:path atomically:YES];
 }
 
-/* 读取字典类型的plist **/
+/** 读取字典类型的plist */
 + (NSMutableDictionary *)readPlistDicWithPath:(NSString *)path {
     NSMutableDictionary *mutDic = nil;
     if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {//文件不存在时初始化地址数组

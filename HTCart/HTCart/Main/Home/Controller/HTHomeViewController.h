@@ -10,6 +10,7 @@
 
 @protocol HTHomeViewControllerDelegate <NSObject>
 
+/** 委托HTCartViewController实现方法*/
 - (void)refreshCart;
 
 @end

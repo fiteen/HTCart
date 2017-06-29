@@ -18,10 +18,10 @@
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 
-/** 商品列表 */
+/** 商品列表*/
 @property (nonatomic, strong) NSArray *goodsArr;
 
-/** 购物车清单本地存储地址 */
+/** 购物车清单本地存储地址*/
 @property (nonatomic, strong) NSString *path;
 
 @end
