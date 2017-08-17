@@ -23,6 +23,8 @@
     CGFloat _totalPrice;
     /** 是否点击页面右上角编辑按钮*/
     BOOL _isPressEditButton;
+    /** rightBarButtonItem按钮文字*/
+    NSString *_rightBarButtonItemTitle;
 }
 
 /** 底部界面-全选/合计/结算*/
@@ -95,13 +97,15 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     [self refreshCart];
     [self updateBottomView];
     self.bottomView.allChooseButton.selected = NO;
+    _rightBarButtonItemTitle = @"编辑";
+    self.navigationItem.rightBarButtonItem.title = _rightBarButtonItemTitle;
 }
 
 - (void)initView {
     self.view.backgroundColor = BACKGROUND_GRAY_COLOR;
     self.navigationItem.title = @"购物车";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editAllGoods:)];
-    self.bottomView.hidden = NO;
+    self.bottomView.hidden = YES;
     
     UINavigationController *navi = self.tabBarController.viewControllers[0];
     HTHomeViewController *homeVC = navi.viewControllers.firstObject;
@@ -111,6 +115,15 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 #pragma mark - TableViewDelegate&TableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    [self.tableView placeholderBaseOnNumber:_cartArray.count iconConfig:^(UIImageView *imageView) {
+        imageView.image = [UIImage imageNamed:@"no_goods_placeholder"];
+    } textConfig:^(UILabel *label) {
+        label.text = @"购物车竟然是空的";
+        label.textColor = TEXT_GRAY_COLOR;
+        label.font = [UIFont systemFontOfSize:15];
+    }];
+    self.bottomView.hidden = _cartArray.count == 0;
+    self.navigationItem.rightBarButtonItem.title = _cartArray.count != 0 ? _rightBarButtonItemTitle : @"";
     return _cartArray.count;
 }
 
@@ -234,14 +247,6 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
         HTCartModel *cartModel = [HTCartModel mj_objectWithKeyValues:plistArray[i]];
         [_cartArray addObject:cartModel];
     }
-    
-    [self.tableView placeholderBaseOnNumber:_cartArray.count iconConfig:^(UIImageView *imageView) {
-        imageView.image = [UIImage imageNamed:@"no_goods_placeholder"];
-    } textConfig:^(UILabel *label) {
-        label.text = @"购物车竟然是空的";
-        label.textColor = TEXT_GRAY_COLOR;
-        label.font = [UIFont systemFontOfSize:15];
-    }];
     [self.tableView reloadData];
 }
 
@@ -257,7 +262,8 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
  */
 - (void)editAllGoods:(UIBarButtonItem *)item {
     BOOL isEdit = [item.title isEqualToString:@"编辑"];
-    item.title =  isEdit ? @"完成" : @"编辑";
+    _rightBarButtonItemTitle = isEdit ? @"完成" : @"编辑";
+    item.title = _rightBarButtonItemTitle;
     _isPressEditButton = isEdit;
     for (HTCartModel *cartModel in _cartArray) {
         cartModel.isEdit = isEdit;
