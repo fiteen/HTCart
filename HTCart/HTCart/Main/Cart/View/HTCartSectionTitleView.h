@@ -11,7 +11,6 @@
 @interface HTCartSectionTitleView : UIView
 
 @property (strong, nonatomic) IBOutlet UIView *contentView;
-
 /** 选择按钮*/
 @property (weak, nonatomic) IBOutlet UIButton *chooseButton;
 /** 商铺按钮*/

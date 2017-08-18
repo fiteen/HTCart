@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 
+/** 是否处于编辑状态*/
+@property (nonatomic, assign) BOOL isEdit;
 /** 全选按钮*/
 @property (weak, nonatomic) IBOutlet UIButton *allChooseButton;
 /** 合计金额*/

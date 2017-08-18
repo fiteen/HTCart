@@ -89,13 +89,14 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
+    [self updateBottomView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     // 初始化信息
     [self refreshCart];
-    [self updateBottomView];
+    self.bottomView.isEdit = NO;
     self.bottomView.allChooseButton.selected = NO;
     _rightBarButtonItemTitle = @"编辑";
     self.navigationItem.rightBarButtonItem.title = _rightBarButtonItemTitle;
@@ -268,6 +269,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
     for (HTCartModel *cartModel in _cartArray) {
         cartModel.isEdit = isEdit;
     }
+    _bottomView.isEdit = isEdit;
     [_tableView reloadData];
 }
 
@@ -363,10 +365,33 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 /**
- * 结算
+ * 结算/删除按钮
  */
 - (void)clickSettleButton:(UIButton *)button {
-    NSLog(@"结算");
+    if ([button.titleLabel.text isEqualToString:@"删除"]) {
+        NSMutableArray *copyCartArray = [_cartArray mutableCopy];
+        for (int i = 0;i < _cartArray.count; i++) {
+            HTCartModel *cartModel = _cartArray[i];
+            if (cartModel.chooseState) {
+                [copyCartArray removeObject:cartModel];
+            } else {
+                NSMutableArray *copyGoodsArray = [cartModel.goods mutableCopy];
+                for (int j = 0; j < cartModel.goods.count; j++) {
+                    HTCartDetailModel *goodsModel = cartModel.goods[j];
+                    if (goodsModel.chooseState) {
+                        [copyGoodsArray removeObject:goodsModel];
+                    }
+                }
+                cartModel.goods = copyGoodsArray;
+            }
+        }
+        _cartArray = copyCartArray;
+        [self writeToFile];
+        [_tableView reloadData];
+        [self updateBottomView];
+    } else {
+        NSLog(@"结算");
+    }
 }
 
 /**
