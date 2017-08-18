@@ -44,9 +44,9 @@
 
 >商品的**添加**：1）从商城中添加；2）在购物车列表中增加。添加时需要考虑购物车列表是否已有相同的或是相同店铺的商品。
 
->商品的**删除**：1）*normal* 状态下侧滑删除；2）点击编辑按钮进入*edit* 状态，点击删除按钮。
+>商品的**删除**：1）*normal* 状态下侧滑删除；2）点击编辑按钮进入*edit* 状态，点击删除按钮；3）点击右下角的批量删除。
 
->商品的**修改**：1）批量编辑修改；2）店铺编辑修改。修改内容包括商品数量和规格
+>商品的**修改**：1）批量编辑修改；2）店铺编辑修改。修改内容包括商品数量和规格。
 
 以上五条涵盖了购物车的基本的功能需求，根据业务需要自行拓展。<br>  
 ![购物车效果图](http://wx2.sinaimg.cn/mw690/ae7fac63gy1fgkq5jrbjjj20af0j5q4q.jpg) 
@@ -120,6 +120,8 @@ cell在*normal* 状态时可以左滑删除，而在*edit* 状态下点击删除
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {}
 ```
 假如要自定义删除键，可以在`UITableViewRowAction`初始化时在`title`的定义部分，使用多个空格作为占位符，然后在`layoutSubviews`中找到cell图层上的`UITableViewCellDeleteConfirmationView`层添加上新定义的删除键。
+
+点击`navigationItem`上的“编辑”后，结算按钮变成删除按钮，可以对选中的商品进行删除，由于是店铺模式的存储形式，需要对模型的更新时机进行区分。
 
 #### 4、总价计算
 总价计算公式很简单： ` 总价=Σ选中的商品的数量 * 选中的商品的单价`
