@@ -211,7 +211,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
 }
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"    " handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+    UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"确认要删除这个宝贝吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         [alertC addAction:cancelAction];
@@ -231,7 +231,7 @@ static NSString * const HTCartNormalCellId = @"HTCartNormalCell";
         [alertC addAction:sureAction];
         [self.navigationController presentViewController:alertC animated:YES completion:nil];
     }];
-    UITableViewRowAction *similarRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"    " handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+    UITableViewRowAction *similarRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"找相似" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         NSLog(@"找相似");
     }];
     return @[deleteRowAction,similarRowAction];
