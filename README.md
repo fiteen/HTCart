@@ -1,6 +1,6 @@
 # HTCart
 
-![](https://img.shields.io/badge/language-object--c-green.svg)
+![](https://img.shields.io/badge/language-Object--C-green.svg)
 
 ## 一  ·  前言
 
